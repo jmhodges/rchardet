@@ -97,7 +97,7 @@ module CharDet
 	    $stderr << "#{@_mModel['charsetName']} confidence = #{cf}, we have a winner\n" if $debug
 	    @_mState = EFoundIt
 	  elsif cf < NEGATIVE_SHORTCUT_THRESHOLD
-	    $stderr << "#{@_mModel['charsetName']} confidence = #{cf}, below negative shortcut threshold #{NEGATIVE_SHORTCUT_THRESHOLD}\n"
+	    $stderr << "#{@_mModel['charsetName']} confidence = #{cf}, below negative shortcut threshold #{NEGATIVE_SHORTCUT_THRESHOLD}\n" if $debug
 	    @_mState = ENotMe
 	  end
 	end

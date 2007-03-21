@@ -28,6 +28,7 @@
 
 module CharDet
   class CharSetGroupProber < CharSetProber
+    attr_accessor :_mProbers
     def initialize
       super
       @_mActiveNum = 0
@@ -39,7 +40,7 @@ module CharDet
       super
       @_mActiveNum = 0
 
-      for prober in self._mProbers:
+      for prober in @_mProbers:
 	if prober
 	  prober.reset()
 	  prober.active = true
@@ -79,7 +80,7 @@ module CharDet
       return get_state()
     end
 
-    def get_confidence
+    def get_confidence()
       st = get_state()
       if st == EFoundIt
 	return 0.99
@@ -95,7 +96,7 @@ module CharDet
 	  next
 	end
 	cf = prober.get_confidence()
-	$stder << "#{prober.get_charset_name} confidence = #{cf}\n"
+	$stderr << "#{prober.get_charset_name} confidence = #{cf}\n" if $debug
 	if bestConf < cf
 	  bestConf = cf
 	  @_mBestGuessProber = prober

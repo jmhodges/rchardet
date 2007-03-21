@@ -32,9 +32,9 @@ module CharDet
   class MultiByteCharSetProber < CharSetProber
     def initialize
       super
-      @_mDistributionAnalyzer = None
-      @_mCodingSM = None
-      @_mLastChar = ["\x00", "\x00"]
+      @_mDistributionAnalyzer = nil
+      @_mCodingSM = nil
+      @_mLastChar = "\x00\x00"
     end
 
     def reset
@@ -45,7 +45,7 @@ module CharDet
       if @_mDistributionAnalyzer
 	@_mDistributionAnalyzer.reset()
       end
-      @_mLastChar = ["\x00", "\x00"]
+      @_mLastChar = "\x00\x00"
     end
 
     def get_charset_name

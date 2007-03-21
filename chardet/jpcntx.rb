@@ -130,7 +130,7 @@ module CharDet
       @_mRelSample = [0] * NUM_OF_CATEGORY # category counters, each interger counts sequence in its category
       @_mNeedToSkipCharNum = 0 # if last byte in current buffer is not the last byte of a character, we need to know how many bytes to skip in next buffer
       @_mLastCharOrder = -1 # The order of previous char
-      @_mDone = constants.False # If this flag is set to constants.True, detection is done and conclusion has been made
+      @_mDone = false # If this flag is set to constants.True, detection is done and conclusion has been made
     end
 
     def feed(aBuf, aLen)
@@ -186,19 +186,19 @@ module CharDet
     def get_order(aStr)
       return -1, 1 if not aStr
       # find out current char's byte length
+      aStr = aStr[0..1].join if aStr.class == Array
       if ((aStr[0..0] >= "\x81") and (aStr[0..0] <= "\x9F")) or ((aStr[0..0] >= "\xE0") and (aStr[0..0] <= "\xFC"))
 	charLen = 2
       else
 	charLen = 1
       end
-
       # return its order if it is hiragana
       if aStr.length > 1
 	if (aStr[0..0] == "\202") and (aStr[1..1] >= "\x9F") and (aStr[1..1] <= "\xF1")
 	  return aStr[1] - 0x9F, charLen
 	end
       end
-
+    
       return -1, charLen
     end
   end
@@ -207,6 +207,7 @@ module CharDet
     def get_order(aStr)
       return -1, 1 unless aStr
       # find out current char's byte length
+      aStr = aStr[0..1].join if aStr.class == Array
       if (aStr[0..0] == "\x8E") or ((aStr[0..0] >= "\xA1") and (aStr[0..0] <= "\xFE")):
 	charLen = 2
       elsif aStr[0..0] == "\x8F"

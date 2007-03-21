@@ -42,7 +42,7 @@ module CharDet
     def next_state(c)
       # for each byte we get its class
       # if it is first byte, we also get byte length
-      byteCls = @_mModel['classTable'][ord(c)]
+      byteCls = @_mModel['classTable'][c[0]]
       if @_mCurrentState == EStart
 	@_mCurrentBytePos = 0
 	@_mCurrentCharLen = @_mModel['charLenTable'][byteCls]

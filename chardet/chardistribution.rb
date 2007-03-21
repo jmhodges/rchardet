@@ -52,7 +52,7 @@ module CharDet
 	# we only care about 2-bytes character in our distribution analysis
 	order = get_order(aStr)
       else
-	order = nil
+	order = -1
       end
       if order >= 0
 	@_mTotalChars += 1
@@ -93,7 +93,7 @@ module CharDet
       # We do not handle characters based on the original encoding string, but 
       # convert this encoding string to a number, here called order.
       # This allows multiple encodings of a language to share one frequency table.
-      return nil
+      return -1
     end
   end
 
@@ -113,7 +113,7 @@ module CharDet
       if aStr[0..0] >= "\xC4"
 	return 94 * (aStr[0] - 0xC4) + aStr[1] - 0xA1
       else
-	return nil
+	return -1
       end
     end
   end
@@ -134,7 +134,7 @@ module CharDet
       if aStr[0..0] >= "\xB0"
 	return 94 * (aStr[0] - 0xB0) + aStr[1] - 0xA1
       else
-	return nil
+	return -1
       end
     end
   end
@@ -155,7 +155,7 @@ module CharDet
       if (aStr[0..0] >= "\xB0") and (aStr[1..1] >= "\xA1")
 	return 94 * (aStr[0] - 0xB0) + aStr[1] - 0xA1
       else
-	return nil
+	return -1
       end
     end
   end
@@ -180,7 +180,7 @@ module CharDet
 	  return 157 * (aStr[0] - 0xA4) + aStr[1] - 0x40
 	end
       else
-	return nil
+	return -1
       end
     end
   end
@@ -198,12 +198,13 @@ module CharDet
       #   first  byte range: 0x81 -- 0x9f , 0xe0 -- 0xfe
       #   second byte range: 0x40 -- 0x7e,  0x81 -- oxfe
       # no validation needed here. State machine has done that
+      aStr = aStr[0..1].join if aStr.class == Array
       if (aStr[0..0] >= "\x81") and (aStr[0..0] <= "\x9F")
 	order = 188 * (aStr[0] - 0x81)
-      elsif (aStr[0..0] >= "\xE0") and (aStr[0] <= "\xEF")
+      elsif (aStr[0..0] >= "\xE0") and (aStr[0..0] <= "\xEF")
 	order = 188 * (aStr[0] - 0xE0 + 31)
       else
-	return nil
+	return -1
       end
       order = order + aStr[1] - 0x40
       if aStr[1..1] > "\x7F"
@@ -229,7 +230,7 @@ module CharDet
       if aStr[0..0] >= "\xA0":
 	return 94 * (aStr[0] - 0xA1) + aStr[1] - 0xa1
       else
-	return nil
+	return -1
       end
     end
   end

@@ -51,7 +51,7 @@ require 'chardet/sbcsgroupprober'
 require 'chardet/sjisprober'
 require 'chardet/universaldetector'
 require 'chardet/utf8prober'
-
+include CharDet
 def CharDet.detect(aBuf)
   u = UniversalDetector.new
   u.reset

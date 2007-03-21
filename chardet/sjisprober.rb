@@ -30,9 +30,9 @@ module CharDet
   class SJISProber < MultiByteCharSetProber
     def initialize
       super()
-      @_mCodingSM = CodingStateMachine(SJISSMModel)
-      @_mDistributionAnalyzer = SJISDistributionAnalysis()
-      @_mContextAnalyzer = SJISContextAnalysis()
+      @_mCodingSM = CodingStateMachine.new(SJISSMModel)
+      @_mDistributionAnalyzer = SJISDistributionAnalysis.new()
+      @_mContextAnalyzer = SJISContextAnalysis.new()
       reset()
     end
 

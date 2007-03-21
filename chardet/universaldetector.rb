@@ -34,12 +34,13 @@ module CharDet
   EHighbyte = 2
 
   class UniversalDetector
+    attr_accessor :result
     def initialize
-      @_highBitDetector = /[\x80-\xFF]/u
-      @_escDetector = /(\033|\~\{)/u
-	@_mEscCharSetProber = nil
-	@_mCharSetProbers = []
-	reset()
+      @_highBitDetector = /[\x80-\xFF]/
+      @_escDetector = /(\033|\~\{)/
+      @_mEscCharSetProber = nil
+      @_mCharSetProbers = []
+      reset()
     end
 
     def reset
@@ -94,7 +95,6 @@ module CharDet
 	@done = true
 	return
       end
-
       if @_mInputState == EPureAscii:
 	if @_highBitDetector =~ (aBuf)
 	  @_mInputState = EHighbyte
@@ -104,7 +104,6 @@ module CharDet
       end
 
       @_mLastChar = aBuf[-1..-1]
-
       if @_mInputState == EEscAscii
 	if not @_mEscCharSetProber
 	  @_mEscCharSetProber = EscCharSetProber.new()
@@ -128,6 +127,7 @@ module CharDet
 	  end
 	end
       end
+
     end
 
     def close
@@ -144,11 +144,10 @@ module CharDet
       end
 
       if @_mInputState == EHighbyte:
-	proberConfidence = nil
-	maxProberConfidence = 0.0
-	maxProber = nil
-	maxProber = @_mCharSetProbers.max{|a,b| a.get_confidence <=> b.get_confidence}
-	if maxProber and (maxProberConfidence > MINIMUM_THRESHOLD)
+	confidences = {}
+        @_mCharSetProbers.each{ |prober| confidences[prober] = prober.get_confidence }
+	maxProber = @_mCharSetProbers.keys.max{ |a,b| confidences[a] <=> confidences[b] }
+	if maxProber and maxProber.get_confidence > MINIMUM_THRESHOLD
 	  @result = {'encoding' =>  maxProber.get_charset_name(),
 			       'confidence' =>  maxProber.get_confidence()}
 	  return @result
@@ -156,10 +155,10 @@ module CharDet
       end
 
       if $debug
-	$stderr << 'no probers hit minimum threshhold\n'
-	for prober in @_mCharSetProbers[0].mProbers
+	$stderr << "no probers hit minimum threshhold\n" if $debug
+	for prober in @_mCharSetProbers[0]._mProbers
 	  next if not prober
-	  $stderr << "#{prober.get_charset_name} confidence = #{prober.get_confidence}\n"
+	  $stderr << "#{prober.get_charset_name} confidence = #{prober.get_confidence}\n" if $debug
 	end
       end
     end

@@ -30,10 +30,10 @@ module CharDet
   class EUCJPProber < MultiByteCharSetProber
     def initialize
       super()
-      @_mCodingSM = CodingStateMachine(EUCJPSMModel)
-      @_mDistributionAnalyzer = EUCJPDistributionAnalysis()
-      @_mContextAnalyzer = EUCJPContextAnalysis()
-      reset()
+      @_mCodingSM = CodingStateMachine.new(EUCJPSMModel)
+      @_mDistributionAnalyzer = EUCJPDistributionAnalysis.new()
+      @_mContextAnalyzer = EUCJPContextAnalysis.new()
+      reset
     end
 
     def reset

@@ -29,11 +29,12 @@
 
 module CharDet
   class CharSetProber
+    attr_accessor :active
     def initialize
     end
 
     def reset
-      @_mState = constants.eDetecting
+      @_mState = EDetecting
     end
 
     def get_charset_name
