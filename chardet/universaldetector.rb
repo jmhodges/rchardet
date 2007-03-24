@@ -146,7 +146,7 @@ module CharDet
       if @_mInputState == EHighbyte:
 	confidences = {}
         @_mCharSetProbers.each{ |prober| confidences[prober] = prober.get_confidence }
-	maxProber = @_mCharSetProbers.keys.max{ |a,b| confidences[a] <=> confidences[b] }
+	maxProber = @_mCharSetProbers.max{ |a,b| confidences[a] <=> confidences[b] }
 	if maxProber and maxProber.get_confidence > MINIMUM_THRESHOLD
 	  @result = {'encoding' =>  maxProber.get_charset_name(),
 			       'confidence' =>  maxProber.get_confidence()}
