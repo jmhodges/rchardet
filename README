@@ -1,7 +1,6 @@
 Usage:
     require 'rubygems'
-    gem 'rchardet'
-    require 'chardet' # Note the difference in the names
+    require 'rchardet'
 
     cd = CharDet.detect(some_data)
     encoding = cd['encoding']
@@ -10,4 +9,4 @@ Usage:
 Project page: 
     http://rubyforge.org/projects/rchardet
 
-    Used heavily in rFeedParser <http://rfeedparser.rubyforge.org>.
+    Made for rFeedParser <http://rfeedparser.rubyforge.org>.
