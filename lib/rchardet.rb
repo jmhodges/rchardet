@@ -56,6 +56,7 @@ require 'rchardet/universaldetector'
 require 'rchardet/utf8prober'
 
 module CharDet
+  VERSION = "1.2"
   def CharDet.detect(aBuf)
     u = UniversalDetector.new
     u.reset
