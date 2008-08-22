@@ -14,6 +14,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 # 02110-1301  USA
 ######################### END LICENSE BLOCK #########################
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
+
 require 'rchardet/charsetprober'
 require 'rchardet/mbcharsetprober'
 
@@ -51,11 +54,13 @@ require 'rchardet/sbcsgroupprober'
 require 'rchardet/sjisprober'
 require 'rchardet/universaldetector'
 require 'rchardet/utf8prober'
-include CharDet
-def CharDet.detect(aBuf)
-  u = UniversalDetector.new
-  u.reset
-  u.feed(aBuf)
-  u.close
-  return u.result
+
+module CharDet
+  def CharDet.detect(aBuf)
+    u = UniversalDetector.new
+    u.reset
+    u.feed(aBuf)
+    u.close
+    u.result
+  end
 end
