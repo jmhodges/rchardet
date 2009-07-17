@@ -109,7 +109,8 @@ module CharDet
 
     def feed(aBuf)
       aBuf = filter_with_english_letters(aBuf)
-      for c in aBuf.split('')
+      aBuf.each_byte do |b|
+	c = b.chr
 	charClass = Latin1_CharToClass[c[0]]
 	freq = Latin1ClassModel[(@_mLastCharClass * CLASS_NUM) + charClass]
 	if freq == 0

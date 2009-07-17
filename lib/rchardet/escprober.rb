@@ -63,7 +63,8 @@ module CharDet
     end
 
     def feed(aBuf)
-      for c in aBuf.split('')
+      aBuf.each_byte do |b|
+	c = b.chr
 	for codingSM in @_mCodingSM
 	  next unless codingSM
 	  next unless codingSM.active

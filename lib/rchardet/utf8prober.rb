@@ -47,7 +47,8 @@ module CharDet
     end
 
     def feed(aBuf)
-      for c in aBuf.split('')
+      aBuf.each_byte do |b|
+	c = b.chr
 	codingState = @_mCodingSM.next_state(c)
 	if codingState == EError
 	  @_mState = ENotMe

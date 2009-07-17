@@ -71,7 +71,8 @@ module CharDet
       if not aLen
 	return get_state()
       end
-      for c in aBuf.split('')
+      aBuf.each_byte do |b|
+	c = b.chr
 	order = @_mModel['charToOrderMap'][c[0]]
 	if order < SYMBOL_CAT_ORDER
 	  @_mTotalChar += 1
