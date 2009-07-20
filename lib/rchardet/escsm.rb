@@ -181,7 +181,7 @@ EError,EError,EError,EItsMe,EError,EError,EError,EError,# 38-3f
 EError,EError,EError,EError,EItsMe,EError,EStart,EStart,# 40-47 
 ]
 
-ISO2022JPCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0]
+ISO2022JPCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 ISO2022JPSMModel = {'classTable' => ISO2022JP_cls,
 		    'classFactor' => 10,
