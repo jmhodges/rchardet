@@ -150,9 +150,9 @@ module CharDet
 	  @_mNeedToSkipCharNum = i - aLen
 	  @_mLastCharOrder = -1
 	else
-	  if (order != -1) and (@_mLastCharOrder != -1):
+	  if (order != -1) and (@_mLastCharOrder != -1)
 	    @_mTotalRel += 1
-	    if @_mTotalRel > MAX_REL_THRESHOLD:
+	    if @_mTotalRel > MAX_REL_THRESHOLD
 	      @_mDone = true
 	      break
 	    end
@@ -169,7 +169,7 @@ module CharDet
 
     def get_confidence
       # This is just one way to calculate confidence. It works well for me.
-      if @_mTotalRel > MINIMUM_DATA_THRESHOLD:
+      if @_mTotalRel > MINIMUM_DATA_THRESHOLD
 	return (@_mTotalRel - @_mRelSample[0]) / @_mTotalRel
       else
 	return DONT_KNOW
@@ -208,7 +208,7 @@ module CharDet
       return -1, 1 unless aStr
       # find out current char's byte length
       aStr = aStr[0..1].join if aStr.class == Array
-      if (aStr[0..0] == "\x8E") or ((aStr[0..0] >= "\xA1") and (aStr[0..0] <= "\xFE")):
+      if (aStr[0..0] == "\x8E") or ((aStr[0..0] >= "\xA1") and (aStr[0..0] <= "\xFE"))
 	charLen = 2
       elsif aStr[0..0] == "\x8F"
 	charLen = 3

@@ -57,8 +57,8 @@ module CharDet
       if order >= 0
 	@_mTotalChars += 1
 	# order is valid
-	if order < @_mTableSize:
-	  if 512 > @_mCharToFreqOrder[order]:
+	if order < @_mTableSize
+	  if 512 > @_mCharToFreqOrder[order]
 	    @_mFreqChars += 1
 	  end
 	end
@@ -72,7 +72,7 @@ module CharDet
 	return SURE_NO
       end
 
-      if @_mTotalChars != @_mFreqChars:
+      if @_mTotalChars != @_mFreqChars
 	r = @_mFreqChars / ((@_mTotalChars - @_mFreqChars) * @_mTypicalDistributionRatio)
 	if r < SURE_YES
 	  return r
@@ -227,10 +227,10 @@ module CharDet
       #   first  byte range: 0xa0 -- 0xfe
       #   second byte range: 0xa1 -- 0xfe
       # no validation needed here. State machine has done that
-      if aStr[0..0] >= "\xA0":
-	return 94 * (aStr[0] - 0xA1) + aStr[1] - 0xa1
+      if aStr[0..0] >= "\xA0"
+        return 94 * (aStr[0] - 0xA1) + aStr[1] - 0xa1
       else
-	return -1
+        return -1
       end
     end
   end

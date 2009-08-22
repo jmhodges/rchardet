@@ -56,7 +56,7 @@ module CharDet
 	elsif codingState == EItsMe
 	  @_mState = EFoundIt
 	  break
-	elsif codingState == EStart:
+	elsif codingState == EStart
 	  charLen = @_mCodingSM.get_current_charlen()
 	  if i == 0
 	    @_mLastChar[1] = aBuf[0..0]

@@ -91,11 +91,11 @@ module CharDet
       end
 
       @_mGotData = true
-      if @result['encoding'] and (@result['confidence'] > 0.0):
+      if @result['encoding'] and (@result['confidence'] > 0.0)
 	@done = true
 	return
       end
-      if @_mInputState == EPureAscii:
+      if @_mInputState == EPureAscii
 	if @_highBitDetector =~ (aBuf)
 	  @_mInputState = EHighbyte
 	elsif (@_mInputState == EPureAscii) and @_escDetector =~ (@_mLastChar + aBuf)
@@ -138,12 +138,12 @@ module CharDet
       end
       @done = true
 
-      if @_mInputState == EPureAscii:
+      if @_mInputState == EPureAscii
 	@result = {'encoding' => 'ascii', 'confidence' => 1.0}
 	return @result
       end
 
-      if @_mInputState == EHighbyte:
+      if @_mInputState == EHighbyte
 	confidences = {}
         @_mCharSetProbers.each{ |prober| confidences[prober] = prober.get_confidence }
 	maxProber = @_mCharSetProbers.max{ |a,b| confidences[a] <=> confidences[b] }

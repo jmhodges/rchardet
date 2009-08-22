@@ -71,7 +71,7 @@ module CharDet
 
       @_mLastChar[0] = aBuf[aLen - 1.. aLen-1]
 
-      if get_state() == EDetecting:
+      if get_state() == EDetecting
 	if @_mContextAnalyzer.got_enough_data() and (get_confidence() > SHORTCUT_THRESHOLD)
 	  @_mState = EFoundIt
 	end

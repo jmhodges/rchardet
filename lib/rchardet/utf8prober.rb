@@ -63,7 +63,7 @@ module CharDet
 	end
       end
 
-      if get_state() == EDetecting:
+      if get_state() == EDetecting
 	if get_confidence() > SHORTCUT_THRESHOLD
 	  @_mState = EFoundIt
 	end

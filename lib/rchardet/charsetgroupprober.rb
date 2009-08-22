@@ -40,7 +40,7 @@ module CharDet
       super
       @_mActiveNum = 0
 
-      for prober in @_mProbers:
+      for prober in @_mProbers
 	if prober
 	  prober.reset()
 	  prober.active = true
