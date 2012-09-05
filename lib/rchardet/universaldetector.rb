@@ -109,7 +109,7 @@ module CharDet
 	  @_mEscCharSetProber = EscCharSetProber.new()
 	end
 	if @_mEscCharSetProber.feed(aBuf) == EFoundIt
-	  @result = {'encoding' =>  self._mEscCharSetProber.get_charset_name(),
+	  @result = {'encoding' =>  @_mEscCharSetProber.get_charset_name(),
 			       'confidence' =>  @_mEscCharSetProber.get_confidence()
 	  }
 	  @done = true
