@@ -28,6 +28,8 @@
 
 module CharDet
   class CodingStateMachine
+    attr_accessor :active
+
     def initialize(sm)
       @_mModel = sm
       @_mCurrentBytePos = 0
