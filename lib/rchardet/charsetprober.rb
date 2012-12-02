@@ -53,11 +53,6 @@ module CharDet
     end
 
     def filter_high_bit_only(aBuf)
-      # DO NOT USE `gsub!`
-      # It will remove all characters from the buffer that is later used by
-      # other probers.  This is because gsub! removes data from the instance variable
-      # that will be passed to later probers, while gsub makes a new instance variable
-      # that will not. 
       newBuf = aBuf.gsub(/([\x00-\x7F])+/, ' ')
       return newBuf
     end
