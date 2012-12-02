@@ -211,7 +211,7 @@ BulgarianLangModel = [
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
 ].freeze
 
-Latin5BulgarianModel = { 
+Latin5BulgarianModel = {
   'charToOrderMap' =>  Latin5_BulgarianCharToOrderMap,
   'precedenceMatrix' =>  BulgarianLangModel,
   'mTypicalPositiveRatio' =>  0.969392,
