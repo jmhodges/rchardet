@@ -62,22 +62,22 @@ module CharDet
     3,3,3,3,3,3,3,3,  # e8 - ef 
     3,3,3,3,3,3,3,3,  # f0 - f7 
     3,3,3,3,3,3,3,0  # f8 - ff 
-  ]
+  ].freeze
 
   BIG5_st = [
     EError,EStart,EStart,     3,EError,EError,EError,EError,#00-07 
     EError,EError,EItsMe,EItsMe,EItsMe,EItsMe,EItsMe,EError,#08-0f 
     EError,EStart,EStart,EStart,EStart,EStart,EStart,EStart #10-17 
-  ]
+  ].freeze
 
-  Big5CharLenTable = [0, 1, 1, 2, 0]
+  Big5CharLenTable = [0, 1, 1, 2, 0].freeze
 
   Big5SMModel = {'classTable' =>  BIG5_cls,
     'classFactor' =>  5,
     'stateTable' =>  BIG5_st,
     'charLenTable' =>  Big5CharLenTable,
     'name' =>  'Big5'
-  }
+  }.freeze
 
   # EUC-JP
 
@@ -114,7 +114,7 @@ module CharDet
     0,0,0,0,0,0,0,0,  # e8 - ef 
     0,0,0,0,0,0,0,0,  # f0 - f7 
     0,0,0,0,0,0,0,5  # f8 - ff 
-  ]
+  ].freeze
 
   EUCJP_st = [
     3,     4,     3,     5,EStart,EError,EError,EError,#00-07 
@@ -122,16 +122,16 @@ module CharDet
     EItsMe,EItsMe,EStart,EError,EStart,EError,EError,EError,#10-17 
     EError,EError,EStart,EError,EError,EError,     3,EError,#18-1f 
     3,EError,EError,EError,EStart,EStart,EStart,EStart #20-27 
-  ]
+  ].freeze
 
-  EUCJPCharLenTable = [2, 2, 2, 3, 1, 0]
+  EUCJPCharLenTable = [2, 2, 2, 3, 1, 0].freeze
 
   EUCJPSMModel = {'classTable' =>  EUCJP_cls,
     'classFactor' =>  6,
     'stateTable' =>  EUCJP_st,
     'charLenTable' =>  EUCJPCharLenTable,
     'name' =>  'EUC-JP'
-  }
+  }.freeze
 
   # EUC-KR
 
@@ -168,21 +168,21 @@ module CharDet
     2,2,2,2,2,2,2,2,  # e8 - ef 
     2,2,2,2,2,2,2,2,  # f0 - f7 
     2,2,2,2,2,2,2,0  # f8 - ff 
-  ]
+  ].freeze
 
   EUCKR_st = [
     EError,EStart,     3,EError,EError,EError,EError,EError,#00-07 
     EItsMe,EItsMe,EItsMe,EItsMe,EError,EError,EStart,EStart#08-0f 
-  ]
+  ].freeze
 
-  EUCKRCharLenTable = [0, 1, 2, 0]
+  EUCKRCharLenTable = [0, 1, 2, 0].freeze
 
   EUCKRSMModel = {'classTable' =>  EUCKR_cls,
     'classFactor' =>  4,
     'stateTable' =>  EUCKR_st,
     'charLenTable' =>  EUCKRCharLenTable,
     'name' =>  'EUC-KR'
-  }
+  }.freeze
 
   # EUC-TW
 
@@ -219,7 +219,7 @@ module CharDet
     3,3,3,3,3,3,3,3,  # e8 - ef 
     3,3,3,3,3,3,3,3,  # f0 - f7 
     3,3,3,3,3,3,3,0  # f8 - ff 
-  ]
+  ].freeze
 
   EUCTW_st = [
     EError,EError,EStart,     3,     3,     3,     4,EError,#00-07 
@@ -228,16 +228,16 @@ module CharDet
     EStart,EStart,EStart,EError,EError,EError,EError,EError,#18-1f 
     5,EError,EError,EError,EStart,EError,EStart,EStart,#20-27 
     EStart,EError,EStart,EStart,EStart,EStart,EStart,EStart #28-2f 
-  ]
+  ].freeze
 
-  EUCTWCharLenTable = [0, 0, 1, 2, 2, 2, 3]
+  EUCTWCharLenTable = [0, 0, 1, 2, 2, 2, 3].freeze
 
   EUCTWSMModel = {'classTable' =>  EUCTW_cls,
     'classFactor' =>  7,
     'stateTable' =>  EUCTW_st,
     'charLenTable' =>  EUCTWCharLenTable,
     'name' =>  'x-euc-tw'
-  }
+  }.freeze
 
   # GB2312
 
@@ -274,7 +274,7 @@ module CharDet
     6,6,6,6,6,6,6,6,  # e8 - ef 
     6,6,6,6,6,6,6,6,  # f0 - f7 
     6,6,6,6,6,6,6,0  # f8 - ff 
-  ]
+  ].freeze
 
   GB2312_st = [
     EError,EStart,EStart,EStart,EStart,EStart,     3,EError,#00-07 
@@ -283,21 +283,21 @@ module CharDet
     4,EError,EStart,EStart,EError,EError,EError,EError,#18-1f 
     EError,EError,     5,EError,EError,EError,EItsMe,EError,#20-27 
     EError,EError,EStart,EStart,EStart,EStart,EStart,EStart#28-2f 
-  ]
+  ].freeze
 
   # To be accurate, the length of class 6 can be either 2 or 4. 
   # But it is not necessary to discriminate between the two since 
   # it is used for frequency analysis only, and we are validing 
   # each code range there as well. So it is safe to set it to be 
   # 2 here. 
-  GB2312CharLenTable = [0, 1, 1, 1, 1, 1, 2]
+  GB2312CharLenTable = [0, 1, 1, 1, 1, 1, 2].freeze
 
   GB2312SMModel = {'classTable' =>  GB2312_cls,
     'classFactor' =>  7,
     'stateTable' =>  GB2312_st,
     'charLenTable' =>  GB2312CharLenTable,
     'name' =>  'GB2312'
-  }
+  }.freeze
 
   # Shift_JIS
 
@@ -336,22 +336,22 @@ module CharDet
     3,3,3,3,3,4,4,4,  # e8 - ef 
     4,4,4,4,4,4,4,4,  # f0 - f7 
     4,4,4,4,4,0,0,0  # f8 - ff 
-  ]
+  ].freeze
 
   SJIS_st = [
     EError,EStart,EStart,     3,EError,EError,EError,EError,#00-07 
     EError,EError,EError,EError,EItsMe,EItsMe,EItsMe,EItsMe,#08-0f 
     EItsMe,EItsMe,EError,EError,EStart,EStart,EStart,EStart#10-17 
-  ]
+  ].freeze
 
-  SJISCharLenTable = [0, 1, 1, 2, 0, 0]
+  SJISCharLenTable = [0, 1, 1, 2, 0, 0].freeze
 
   SJISSMModel = {'classTable' =>  SJIS_cls,
     'classFactor' =>  6,
     'stateTable' =>  SJIS_st,
     'charLenTable' =>  SJISCharLenTable,
     'name' =>  'Shift_JIS'
-  }
+  }.freeze
 
   # UCS2-BE
 
@@ -388,7 +388,7 @@ module CharDet
     0,0,0,0,0,0,0,0,  # e8 - ef 
     0,0,0,0,0,0,0,0,  # f0 - f7 
     0,0,0,0,0,0,4,5  # f8 - ff 
-  ]
+  ].freeze
 
   UCS2BE_st  = [
     5,     7,     7,EError,     4,     3,EError,EError,#00-07 
@@ -398,16 +398,16 @@ module CharDet
     6,     6,     6,     6,     5,     7,     7,EError,#20-27 
     5,     8,     6,     6,EError,     6,     6,     6,#28-2f 
     6,     6,     6,     6,EError,EError,EStart,EStart#30-37 
-  ]
+  ].freeze
 
-  UCS2BECharLenTable = [2, 2, 2, 0, 2, 2]
+  UCS2BECharLenTable = [2, 2, 2, 0, 2, 2].freeze
 
   UCS2BESMModel = {'classTable' =>  UCS2BE_cls,
     'classFactor' =>  6,
     'stateTable' =>  UCS2BE_st,
     'charLenTable' =>  UCS2BECharLenTable,
     'name' =>  'UTF-16BE'
-  }
+  }.freeze
 
   # UCS2-LE
 
@@ -444,7 +444,7 @@ module CharDet
     0,0,0,0,0,0,0,0,  # e8 - ef 
     0,0,0,0,0,0,0,0,  # f0 - f7 
     0,0,0,0,0,0,4,5  # f8 - ff 
-  ]
+  ].freeze
 
   UCS2LE_st = [
     6,     6,     7,     6,     4,     3,EError,EError,#00-07 
@@ -454,16 +454,16 @@ module CharDet
     7,     6,     8,     8,     5,     5,     5,EError,#20-27 
     5,     5,     5,EError,EError,EError,     5,     5,#28-2f 
     5,     5,     5,EError,     5,EError,EStart,EStart#30-37 
-  ]
+  ].freeze
 
-  UCS2LECharLenTable = [2, 2, 2, 2, 2, 2]
+  UCS2LECharLenTable = [2, 2, 2, 2, 2, 2].freeze
 
   UCS2LESMModel = {'classTable' =>  UCS2LE_cls,
     'classFactor' =>  6,
     'stateTable' =>  UCS2LE_st,
     'charLenTable' =>  UCS2LECharLenTable,
     'name' =>  'UTF-16LE'
-  }
+  }.freeze
 
   # UTF-8
 
@@ -500,7 +500,7 @@ module CharDet
     8,8,8,8,8,9,8,8,  # e8 - ef 
     10,11,11,11,11,11,11,11,  # f0 - f7 
     12,13,13,13,14,15,0,0   # f8 - ff 
-  ]
+  ].freeze
 
   UTF8_st = [ 
     EError,EStart,EError,EError,EError,EError,     12,   10,#00-07 
@@ -529,14 +529,14 @@ module CharDet
     EError,EError,EError,EError,EError,EError,EError,EError,#b8-bf 
     EError,EError,EStart,EStart,EStart,EStart,EError,EError,#c0-c7 
     EError,EError,EError,EError,EError,EError,EError,EError#c8-cf 
-  ]
+  ].freeze
 
-  UTF8CharLenTable = [0, 1, 0, 0, 0, 0, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6]
+  UTF8CharLenTable = [0, 1, 0, 0, 0, 0, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6].freeze
 
   UTF8SMModel = {'classTable' =>  UTF8_cls,
     'classFactor' =>  16,
     'stateTable' =>  UTF8_st,
     'charLenTable' =>  UTF8CharLenTable,
     'name' =>  'UTF-8'
-  }
+  }.freeze
 end

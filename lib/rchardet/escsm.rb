@@ -59,7 +59,7 @@ module CharDet
     1,1,1,1,1,1,1,1,  # e8 - ef 
     1,1,1,1,1,1,1,1,  # f0 - f7 
     1,1,1,1,1,1,1,1,  # f8 - ff 
-  ]
+  ].freeze
 
   HZ_st = [
     EStart,EError,     3,EStart,EStart,EStart,EError,EError,# 00-07 
@@ -68,16 +68,16 @@ module CharDet
     5,EError,     6,EError,     5,     5,     4,EError,# 18-1f 
     4,EError,     4,     4,     4,EError,     4,EError,# 20-27 
     4,EItsMe,EStart,EStart,EStart,EStart,EStart,EStart,# 28-2f 
-  ]
+  ].freeze
 
-  HZCharLenTable = [0, 0, 0, 0, 0, 0]
+  HZCharLenTable = [0, 0, 0, 0, 0, 0].freeze
 
   HZSMModel = {'classTable' => HZ_cls,
     'classFactor' => 6,
     'stateTable' => HZ_st,
     'charLenTable' => HZCharLenTable,
     'name' => "HZ-GB-2312"
-  }
+  }.freeze
 
 ISO2022CN_cls = [
 2,0,0,0,0,0,0,0,  # 00 - 07 
@@ -112,7 +112,7 @@ ISO2022CN_cls = [
 2,2,2,2,2,2,2,2,  # e8 - ef 
 2,2,2,2,2,2,2,2,  # f0 - f7 
 2,2,2,2,2,2,2,2,  # f8 - ff 
-]
+].freeze
 
 ISO2022CN_st = [
 EStart,     3,EError,EStart,EStart,EStart,EStart,EStart,# 00-07 
@@ -123,16 +123,16 @@ EError,EError,EError,EItsMe,EError,EError,EError,EError,# 20-27
      5,     6,EError,EError,EError,EError,EError,EError,# 28-2f 
 EError,EError,EError,EItsMe,EError,EError,EError,EError,# 30-37 
 EError,EError,EError,EError,EError,EItsMe,EError,EStart,# 38-3f 
-]
+].freeze
 
-ISO2022CNCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+ISO2022CNCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0, 0].freeze
 
 ISO2022CNSMModel = {'classTable' => ISO2022CN_cls,
     'classFactor' => 9,
     'stateTable' => ISO2022CN_st,
     'charLenTable' => ISO2022CNCharLenTable,
     'name' => "ISO-2022-CN"
-  }
+  }.freeze
 
 ISO2022JP_cls = [
 2,0,0,0,0,0,0,0,  # 00 - 07 
@@ -167,7 +167,7 @@ ISO2022JP_cls = [
 2,2,2,2,2,2,2,2,  # e8 - ef 
 2,2,2,2,2,2,2,2,  # f0 - f7 
 2,2,2,2,2,2,2,2,  # f8 - ff 
-]
+].freeze
 
 ISO2022JP_st = [ 
 EStart,     3,EError,EStart,EStart,EStart,EStart,EStart,# 00-07 
@@ -179,16 +179,16 @@ EError,EError,EError,     6,EItsMe,EError,EItsMe,EError,# 28-2f
 EError,EError,EError,EError,EError,EError,EItsMe,EItsMe,# 30-37 
 EError,EError,EError,EItsMe,EError,EError,EError,EError,# 38-3f 
 EError,EError,EError,EError,EItsMe,EError,EStart,EStart,# 40-47 
-]
+].freeze
 
-ISO2022JPCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+ISO2022JPCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0].freeze
 
 ISO2022JPSMModel = {'classTable' => ISO2022JP_cls,
     'classFactor' => 10,
     'stateTable' => ISO2022JP_st,
     'charLenTable' => ISO2022JPCharLenTable,
     'name' => "ISO-2022-JP"
-  }
+  }.freeze
 
 ISO2022KR_cls = [
 2,0,0,0,0,0,0,0,  # 00 - 07 
@@ -223,7 +223,7 @@ ISO2022KR_cls = [
 2,2,2,2,2,2,2,2,  # e8 - ef 
 2,2,2,2,2,2,2,2,  # f0 - f7 
 2,2,2,2,2,2,2,2,  # f8 - ff 
-]
+].freeze
 
 ISO2022KR_st = [ 
 EStart,     3,EError,EStart,EStart,EStart,EError,EError,# 00-07 
@@ -231,14 +231,14 @@ EError,EError,EError,EError,EItsMe,EItsMe,EItsMe,EItsMe,# 08-0f
 EItsMe,EItsMe,EError,EError,EError,     4,EError,EError,# 10-17 
 EError,EError,EError,EError,     5,EError,EError,EError,# 18-1f 
 EError,EError,EError,EItsMe,EStart,EStart,EStart,EStart,# 20-27 
-]
+].freeze
 
-ISO2022KRCharLenTable = [0, 0, 0, 0, 0, 0]
+ISO2022KRCharLenTable = [0, 0, 0, 0, 0, 0].freeze
 
 ISO2022KRSMModel = {'classTable' => ISO2022KR_cls,
     'classFactor' => 6,
     'stateTable' => ISO2022KR_st,
     'charLenTable' => ISO2022KRCharLenTable,
     'name' => "ISO-2022-KR"
-  }
+  }.freeze
 end

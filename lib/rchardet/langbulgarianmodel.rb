@@ -53,7 +53,7 @@ Latin5_BulgarianCharToOrderMap = [
   1, 18,  9, 20, 11,  3, 23, 15,  2, 26, 12, 10, 14,  6,  4, 13,  # d0
   7,  8,  5, 19, 29, 25, 22, 21, 27, 24, 17, 75, 52,241, 42, 16,  # e0
  62,242,243,244, 58,245, 98,246,247,248,249,250,251, 91,252,253,  # f0
-]
+].freeze
 
 win1251BulgarianCharToOrderMap = [
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -72,7 +72,7 @@ win1251BulgarianCharToOrderMap = [
  39, 28, 34, 51, 48, 49, 53, 50, 54, 57, 61,251, 67,252, 60, 56,  # d0
   1, 18,  9, 20, 11,  3, 23, 15,  2, 26, 12, 10, 14,  6,  4, 13,  # e0
   7,  8,  5, 19, 29, 25, 22, 21, 27, 24, 17, 75, 52,253, 42, 16,  # f0
-]
+].freeze
 
 # Model Table: 
 # total sequences: 100%
@@ -209,7 +209,7 @@ BulgarianLangModel = [
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0,1,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-]
+].freeze
 
 Latin5BulgarianModel = { 
   'charToOrderMap' =>  Latin5_BulgarianCharToOrderMap,
@@ -217,7 +217,7 @@ Latin5BulgarianModel = {
   'mTypicalPositiveRatio' =>  0.969392,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "ISO-8859-5"
-}
+}.freeze
 
 Win1251BulgarianModel = { 
   'charToOrderMap' =>  win1251BulgarianCharToOrderMap,
@@ -225,5 +225,5 @@ Win1251BulgarianModel = {
   'mTypicalPositiveRatio' =>  0.969392,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "windows-1251"
-}
+}.freeze
 end

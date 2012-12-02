@@ -51,7 +51,7 @@ module CharDet
     35, 48,250, 37, 33, 45, 56, 50, 84, 57,120,121, 17, 18, 22, 15,  # d0
     124,  1, 29, 20, 21,  3, 32, 13, 25,  5, 11, 16, 10,  6, 30,  4,  # e0
     9,  8, 14,  7,  2, 12, 28, 23, 42, 24, 64, 75, 19, 26, 27,253,  # f0
-  ]
+  ].freeze
 
   Win1253_CharToOrderMap = [
     255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -70,7 +70,7 @@ module CharDet
     35, 48,250, 37, 33, 45, 56, 50, 84, 57,120,121, 17, 18, 22, 15,  # d0
     124,  1, 29, 20, 21,  3, 32, 13, 25,  5, 11, 16, 10,  6, 30,  4,  # e0
     9,  8, 14,  7,  2, 12, 28, 23, 42, 24, 64, 75, 19, 26, 27,253,  # f0
-  ]
+  ].freeze
 
   # Model Table: 
   # total sequences: 100%
@@ -207,7 +207,7 @@ module CharDet
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-  ]
+  ].freeze
 
   Latin7GreekModel = { 
   'charToOrderMap' =>  Latin7_CharToOrderMap,
@@ -215,7 +215,7 @@ module CharDet
   'mTypicalPositiveRatio' =>  0.982851,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "ISO-8859-7"
-  }
+  }.freeze
 
   Win1253GreekModel = { 
   'charToOrderMap' => Win1253_CharToOrderMap,
@@ -223,5 +223,5 @@ module CharDet
   'mTypicalPositiveRatio' => 0.982851,
   'keepEnglishLetter' => false,
   'charsetName' => "windows-1253"
-  }
+  }.freeze
 end

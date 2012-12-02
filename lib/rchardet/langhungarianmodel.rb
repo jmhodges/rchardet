@@ -50,7 +50,7 @@ Latin2_HungarianCharToOrderMap = [
 232,233,234, 58,235, 66, 59,236,237,238, 60, 69, 63,239,240,241,
  82, 14, 74,242, 70, 80,243, 72,244, 15, 83, 77, 84, 30, 76, 85,
 245,246,247, 25, 73, 42, 24,248,249,250, 31, 56, 29,251,252,253,
-]
+].freeze
 
 Win1250HungarianCharToOrderMap = [
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -69,7 +69,7 @@ Win1250HungarianCharToOrderMap = [
 232,233,234, 58,235, 66, 59,236,237,238, 60, 70, 63,239,240,241,
  84, 14, 75,242, 71, 82,243, 73,244, 15, 85, 79, 86, 30, 77, 87,
 245,246,247, 25, 74, 42, 24,248,249,250, 31, 56, 29,251,252,253,
-]
+].freeze
 
 # Model Table: 
 # total sequences: 100%
@@ -206,7 +206,7 @@ HungarianLangModel = [
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,1,1,1,1,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,
 0,1,1,1,1,1,1,0,1,1,0,1,0,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,
-]
+].freeze
 
 Latin2HungarianModel = { 
   'charToOrderMap' =>  Latin2_HungarianCharToOrderMap,
@@ -214,7 +214,7 @@ Latin2HungarianModel = {
   'mTypicalPositiveRatio' =>  0.947368,
   'keepEnglishLetter' =>  true,
   'charsetName' =>  "ISO-8859-2"
-}
+}.freeze
 
 Win1250HungarianModel = { 
   'charToOrderMap' =>  Win1250HungarianCharToOrderMap,
@@ -222,5 +222,5 @@ Win1250HungarianModel = {
   'mTypicalPositiveRatio' =>  0.947368,
   'keepEnglishLetter' =>  true,
   'charsetName' =>  "windows-1250"
-}
+}.freeze
 end

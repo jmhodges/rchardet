@@ -46,7 +46,7 @@ KOI8R_CharToOrderMap = [
  15, 16,  9,  7,  6, 14, 24, 10, 17, 18, 20, 25, 30, 29, 22, 54,  # d0
  59, 37, 44, 58, 41, 48, 53, 46, 55, 42, 60, 36, 49, 38, 31, 34,  # e0
  35, 43, 45, 32, 40, 52, 56, 33, 61, 62, 51, 57, 47, 63, 50, 70,  # f0
-]
+].freeze
 
 win1251_CharToOrderMap = [ 
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -65,7 +65,7 @@ win1251_CharToOrderMap = [
  45, 32, 40, 52, 53, 55, 58, 50, 57, 63, 70, 62, 61, 47, 59, 43,
   3, 21, 10, 19, 13,  2, 24, 20,  4, 23, 11,  8, 12,  5,  1, 15,
   9,  7,  6, 14, 39, 26, 28, 22, 25, 29, 54, 18, 17, 30, 27, 16,
-]
+].freeze
 
 latin5_CharToOrderMap = [
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -84,7 +84,7 @@ latin5_CharToOrderMap = [
   3, 21, 10, 19, 13,  2, 24, 20,  4, 23, 11,  8, 12,  5,  1, 15,
   9,  7,  6, 14, 39, 26, 28, 22, 25, 29, 54, 18, 17, 30, 27, 16,
 239, 68,240,241,242,243,244,245,246,247,248,249,250,251,252,255,
-]
+].freeze
 
 macCyrillic_CharToOrderMap = [
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -103,7 +103,7 @@ macCyrillic_CharToOrderMap = [
 239,240,241,242,243,244,245,246,247,248,249,250,251,252, 68, 16,
   3, 21, 10, 19, 13,  2, 24, 20,  4, 23, 11,  8, 12,  5,  1, 15,
   9,  7,  6, 14, 39, 26, 28, 22, 25, 29, 54, 18, 17, 30, 27,255,
-]
+].freeze
 
 IBM855_CharToOrderMap = [
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -122,7 +122,7 @@ IBM855_CharToOrderMap = [
   8, 49, 12, 38,  5, 31,  1, 34, 15,244,245,246,247, 35, 16,248,
  43,  9, 45,  7, 32,  6, 40, 14, 52, 24, 56, 10, 33, 17, 61,249,
 250, 18, 62, 20, 51, 25, 57, 30, 47, 29, 63, 22, 50,251,252,255,
-]
+].freeze
 
 IBM866_CharToOrderMap = [
 255,255,255,255,255,255,255,255,255,255,254,255,255,254,255,255,  # 00
@@ -141,7 +141,7 @@ IBM866_CharToOrderMap = [
 223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,
   9,  7,  6, 14, 39, 26, 28, 22, 25, 29, 54, 18, 17, 30, 27, 16,
 239, 68,240,241,242,243,244,245,246,247,248,249,250,251,252,255,
-]
+].freeze
 
 # Model Table: 
 # total sequences: 100%
@@ -278,7 +278,7 @@ RussianLangModel = [
 1,1,0,1,1,0,1,0,1,0,0,0,0,1,1,0,1,1,0,0,0,0,0,1,0,1,1,0,1,0,0,0,
 0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,
-]
+].freeze
 
 Koi8rModel = { 
   'charToOrderMap' =>  KOI8R_CharToOrderMap,
@@ -286,7 +286,7 @@ Koi8rModel = {
   'mTypicalPositiveRatio' =>  0.976601,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "KOI8-R"
-}
+}.freeze
 
 Win1251CyrillicModel = { 
   'charToOrderMap' =>  win1251_CharToOrderMap,
@@ -294,7 +294,7 @@ Win1251CyrillicModel = {
   'mTypicalPositiveRatio' =>  0.976601,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "windows-1251"
-}
+}.freeze
 
 Latin5CyrillicModel = { 
   'charToOrderMap' =>  latin5_CharToOrderMap,
@@ -302,7 +302,7 @@ Latin5CyrillicModel = {
   'mTypicalPositiveRatio' =>  0.976601,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "ISO-8859-5"
-}
+}.freeze
 
 MacCyrillicModel = { 
   'charToOrderMap' =>  macCyrillic_CharToOrderMap,
@@ -310,7 +310,7 @@ MacCyrillicModel = {
   'mTypicalPositiveRatio' =>  0.976601,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "MacCyrillic"
-}
+}.freeze
 
 Ibm866Model = { 
   'charToOrderMap' =>  IBM866_CharToOrderMap,
@@ -318,7 +318,7 @@ Ibm866Model = {
   'mTypicalPositiveRatio' =>  0.976601,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "IBM866"
-}
+}.freeze
 
 Ibm855Model = { 
   'charToOrderMap' =>  IBM855_CharToOrderMap,
@@ -326,5 +326,5 @@ Ibm855Model = {
   'mTypicalPositiveRatio' =>  0.976601,
   'keepEnglishLetter' =>  false,
   'charsetName' =>  "IBM855"
-}
+}.freeze
 end
