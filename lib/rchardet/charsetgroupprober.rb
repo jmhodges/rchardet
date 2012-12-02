@@ -53,8 +53,9 @@ module CharDet
     def get_charset_name
       if not @_mBestGuessProber
         get_confidence()
-        return nil unless @_mBestGuessProber
-        #                self._mBestGuessProber = self._mProbers[0]
+        if not @_mBestGuessProber
+          return nil
+        end
       end
       return @_mBestGuessProber.get_charset_name()
     end
