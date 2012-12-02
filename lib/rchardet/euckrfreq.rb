@@ -7,6 +7,7 @@
 # the Initial Developer. All Rights Reserved.
 #
 # Contributor(s):
+#   Jeff Hodges - port to Ruby
 #   Mark Pilgrim - port to Python
 #
 # This library is free software; you can redistribute it and/or
