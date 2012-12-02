@@ -186,7 +186,6 @@ module CharDet
     def get_order(aStr)
       return -1, 1 if not aStr
       # find out current char's byte length
-      aStr = aStr[0, 2].join if aStr.class == Array
       first = aStr[0, 1]
       if ((first >= "\x81") and (first <= "\x9F")) or ((first >= "\xE0") and (first <= "\xFC"))
         charLen = 2
@@ -209,7 +208,6 @@ module CharDet
     def get_order(aStr)
       return -1, 1 unless aStr
       # find out current char's byte length
-      aStr = aStr[0, 2].join if aStr.class == Array
       first = aStr[0, 1]
       if (first == "\x8E") or ((first >= "\xA1") and (first <= "\xFE"))
         charLen = 2

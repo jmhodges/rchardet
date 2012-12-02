@@ -198,7 +198,6 @@ module CharDet
       #   first  byte range: 0x81 -- 0x9f , 0xe0 -- 0xfe
       #   second byte range: 0x40 -- 0x7e,  0x81 -- oxfe
       # no validation needed here. State machine has done that
-      aStr = aStr[0, 2].join if aStr.class == Array
       if (aStr[0, 1] >= "\x81") and (aStr[0, 1] <= "\x9F")
         order = 188 * (aStr[0] - 0x81)
       elsif (aStr[0, 1] >= "\xE0") and (aStr[0, 1] <= "\xEF")
