@@ -105,9 +105,6 @@ module CharDet
       end
       return 0.0 unless @bestGuessProber
       return bestConf
-      #        else:
-      #            self._mBestGuessProber = self._mProbers[0]
-      #            return self._mBestGuessProber.get_confidence()
     end
   end
 end

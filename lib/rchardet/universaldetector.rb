@@ -156,7 +156,7 @@ module CharDet
 
       if $debug
         $stderr << "no probers hit minimum threshhold\n" if $debug
-        for prober in @charSetProbers[0]._mProbers
+        for prober in @charSetProbers[0].probers
           next if !prober
           $stderr << "#{prober.get_charset_name} confidence = #{prober.get_confidence}\n" if $debug
         end
