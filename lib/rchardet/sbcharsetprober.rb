@@ -68,7 +68,7 @@ module CharDet
         aBuf = filter_without_english_letters(aBuf)
       end
       aLen = aBuf.length
-      if aLen != 0
+      if aLen == 0
         return get_state()
       end
       aBuf.each_byte do |b|
