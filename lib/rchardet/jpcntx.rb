@@ -144,7 +144,7 @@ module CharDet
       # this character will simply our logic and improve performance.
       i = @needToSkipCharNum
       while i < aLen
-        order, charLen = get_order(aBuf[i...i+2])
+        order, charLen = get_order(aBuf[i, 2])
         i += charLen
         if i > aLen
           @needToSkipCharNum = i - aLen
@@ -186,15 +186,17 @@ module CharDet
     def get_order(aStr)
       return -1, 1 if not aStr
       # find out current char's byte length
-      aStr = aStr[0..1].join if aStr.class == Array
-      if ((aStr[0..0] >= "\x81") and (aStr[0..0] <= "\x9F")) or ((aStr[0..0] >= "\xE0") and (aStr[0..0] <= "\xFC"))
+      aStr = aStr[0, 2].join if aStr.class == Array
+      first = aStr[0, 1]
+      if ((first >= "\x81") and (first <= "\x9F")) or ((first >= "\xE0") and (first <= "\xFC"))
         charLen = 2
       else
         charLen = 1
       end
       # return its order if it is hiragana
       if aStr.length > 1
-        if (aStr[0..0] == "\202") and (aStr[1..1] >= "\x9F") and (aStr[1..1] <= "\xF1")
+        second = aStr[1, 1]
+        if (first == "\202") and (second >= "\x9F") and (second <= "\xF1")
           return aStr[1] - 0x9F, charLen
         end
       end
@@ -207,10 +209,11 @@ module CharDet
     def get_order(aStr)
       return -1, 1 unless aStr
       # find out current char's byte length
-      aStr = aStr[0..1].join if aStr.class == Array
-      if (aStr[0..0] == "\x8E") or ((aStr[0..0] >= "\xA1") and (aStr[0..0] <= "\xFE"))
+      aStr = aStr[0, 2].join if aStr.class == Array
+      first = aStr[0, 1]
+      if (first == "\x8E") or ((first >= "\xA1") and (first <= "\xFE"))
         charLen = 2
-      elsif aStr[0..0] == "\x8F"
+      elsif first == "\x8F"
         charLen = 3
       else
         charLen = 1
@@ -218,7 +221,8 @@ module CharDet
 
       # return its order if it is hiragana
       if aStr.length > 1
-        if (aStr[0..0] == "\xA4") and (aStr[1..1] >= "\xA1") and (aStr[1..1] <= "\xF3")
+        second = aStr[1, 1]
+        if (first == "\xA4") and (second >= "\xA1") and (second <= "\xF3")
           return aStr[1] - 0xA1, charLen
         end
       end

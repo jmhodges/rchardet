@@ -110,7 +110,7 @@ module CharDet
       #   first  byte range: 0xc4 -- 0xfe
       #   second byte range: 0xa1 -- 0xfe
       # no validation needed here. State machine has done that
-      if aStr[0..0] >= "\xC4"
+      if aStr[0, 1] >= "\xC4"
         return 94 * (aStr[0] - 0xC4) + aStr[1] - 0xA1
       else
         return -1
@@ -131,7 +131,7 @@ module CharDet
       #   first  byte range: 0xb0 -- 0xfe
       #   second byte range: 0xa1 -- 0xfe
       # no validation needed here. State machine has done that
-      if aStr[0..0] >= "\xB0"
+      if aStr[0, 1] >= "\xB0"
         return 94 * (aStr[0] - 0xB0) + aStr[1] - 0xA1
       else
         return -1
@@ -152,7 +152,7 @@ module CharDet
       #  first  byte range: 0xb0 -- 0xfe
       #  second byte range: 0xa1 -- 0xfe
       # no validation needed here. State machine has done that
-      if (aStr[0..0] >= "\xB0") and (aStr[1..1] >= "\xA1")
+      if (aStr[0, 1] >= "\xB0") and (aStr[1, 1] >= "\xA1")
         return 94 * (aStr[0] - 0xB0) + aStr[1] - 0xA1
       else
         return -1
@@ -173,8 +173,8 @@ module CharDet
       #   first  byte range: 0xa4 -- 0xfe
       #   second byte range: 0x40 -- 0x7e , 0xa1 -- 0xfe
       # no validation needed here. State machine has done that
-      if aStr[0..0] >= "\xA4"
-        if aStr[1..1] >= "\xA1"
+      if aStr[0, 1] >= "\xA4"
+        if aStr[1, 1] >= "\xA1"
           return 157 * (aStr[0] - 0xA4) + aStr[1] - 0xA1 + 63
         else
           return 157 * (aStr[0] - 0xA4) + aStr[1] - 0x40
@@ -198,16 +198,16 @@ module CharDet
       #   first  byte range: 0x81 -- 0x9f , 0xe0 -- 0xfe
       #   second byte range: 0x40 -- 0x7e,  0x81 -- oxfe
       # no validation needed here. State machine has done that
-      aStr = aStr[0..1].join if aStr.class == Array
-      if (aStr[0..0] >= "\x81") and (aStr[0..0] <= "\x9F")
+      aStr = aStr[0, 2].join if aStr.class == Array
+      if (aStr[0, 1] >= "\x81") and (aStr[0, 1] <= "\x9F")
         order = 188 * (aStr[0] - 0x81)
-      elsif (aStr[0..0] >= "\xE0") and (aStr[0..0] <= "\xEF")
+      elsif (aStr[0, 1] >= "\xE0") and (aStr[0, 1] <= "\xEF")
         order = 188 * (aStr[0] - 0xE0 + 31)
       else
         return -1
       end
       order = order + aStr[1] - 0x40
-      if aStr[1..1] > "\x7F"
+      if aStr[1, 1] > "\x7F"
         order =- 1
       end
       return order
@@ -227,7 +227,7 @@ module CharDet
       #   first  byte range: 0xa0 -- 0xfe
       #   second byte range: 0xa1 -- 0xfe
       # no validation needed here. State machine has done that
-      if aStr[0..0] >= "\xA0"
+      if aStr[0, 1] >= "\xA0"
         return 94 * (aStr[0] - 0xA1) + aStr[1] - 0xa1
       else
         return -1

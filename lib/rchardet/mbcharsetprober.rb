@@ -54,7 +54,7 @@ module CharDet
     def feed(aBuf)
       aLen = aBuf.length
       for i in (0...aLen)
-        codingState = @codingSM.next_state(aBuf[i..i])
+        codingState = @codingSM.next_state(aBuf[i, 1])
         if codingState == EError
           $stderr << "#{get_charset_name} prober hit error at byte #{i}\n" if $debug
           @state = ENotMe
@@ -65,14 +65,14 @@ module CharDet
         elsif codingState == EStart
           charLen = @codingSM.get_current_charlen()
           if i == 0
-            @lastChar[1] = aBuf[0..0]
+            @lastChar[1] = aBuf[0, 1]
             @distributionAnalyzer.feed(@lastChar, charLen)
           else
-            @distributionAnalyzer.feed(aBuf[i-1...i+1], charLen)
+            @distributionAnalyzer.feed(aBuf[i-1, 2], charLen)
           end
         end
       end
-      @lastChar[0] = aBuf[aLen-1..aLen-1]
+      @lastChar[0] = aBuf[aLen-1, 1]
 
       if get_state() == EDetecting
         if @distributionAnalyzer.got_enough_data() and (get_confidence() > SHORTCUT_THRESHOLD)

@@ -66,25 +66,25 @@ module CharDet
 
       if not @gotData
         # If the data starts with BOM, we know it is UTF
-        if aBuf[0...3] == "\xEF\xBB\xBF"
+        if aBuf[0, 3] == "\xEF\xBB\xBF"
           # EF BB BF  UTF-8 with BOM
           @result = {'encoding' => "UTF-8", 'confidence' => 1.0}
-        elsif aBuf[0...4] == "\xFF\xFE\x00\x00"
+        elsif aBuf[0, 4] == "\xFF\xFE\x00\x00"
           # FF FE 00 00  UTF-32, little-endian BOM
           @result = {'encoding' => "UTF-32LE", 'confidence' => 1.0}
-        elsif aBuf[0...4] == "\x00\x00\xFE\xFF"
+        elsif aBuf[0, 4] == "\x00\x00\xFE\xFF"
           # 00 00 FE FF  UTF-32, big-endian BOM
           @result = {'encoding' => "UTF-32BE", 'confidence' => 1.0}
-        elsif aBuf[0...4] == "\xFE\xFF\x00\x00"
+        elsif aBuf[0, 4] == "\xFE\xFF\x00\x00"
           # FE FF 00 00  UCS-4, unusual octet order BOM (3412)
           @result = {'encoding' => "X-ISO-10646-UCS-4-3412", 'confidence' => 1.0}
-        elsif aBuf[0...4] == "\x00\x00\xFF\xFE"
+        elsif aBuf[0, 4] == "\x00\x00\xFF\xFE"
           # 00 00 FF FE  UCS-4, unusual octet order BOM (2143)
           @result = {'encoding' =>  "X-ISO-10646-UCS-4-2143", 'confidence' =>  1.0}
-        elsif aBuf[0...2] == "\xFF\xFE"
+        elsif aBuf[0, 2] == "\xFF\xFE"
           # FF FE  UTF-16, little endian BOM
           @result = {'encoding' =>  "UTF-16LE", 'confidence' =>  1.0}
-        elsif aBuf[0...2] == "\xFE\xFF"
+        elsif aBuf[0, 2] == "\xFE\xFF"
           # FE FF  UTF-16, big endian BOM
           @result = {'encoding' =>  "UTF-16BE", 'confidence' =>  1.0}
         end
@@ -103,7 +103,7 @@ module CharDet
         end
       end
 
-      @lastChar = aBuf[-1..-1]
+      @lastChar = aBuf[-1, 1]
       if @inputState == EEscAscii
         if not @escCharSetProber
           @escCharSetProber = EscCharSetProber.new()
