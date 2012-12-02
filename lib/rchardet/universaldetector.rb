@@ -105,7 +105,7 @@ module CharDet
 
       @lastChar = aBuf[-1, 1]
       if @inputState == EEscAscii
-        if not @escCharSetProber
+        if !@escCharSetProber
           @escCharSetProber = EscCharSetProber.new()
         end
         if @escCharSetProber.feed(aBuf) == EFoundIt
@@ -115,7 +115,7 @@ module CharDet
           @done = true
         end
       elsif @inputState == EHighbyte
-        if not @charSetProbers or @charSetProbers.empty?
+        if @charSetProbers.nil? || @charSetProbers.empty?
           @charSetProbers = [MBCSGroupProber.new(), SBCSGroupProber.new(), Latin1Prober.new()]
         end
         for prober in @charSetProbers
@@ -132,7 +132,7 @@ module CharDet
 
     def close
       return if @done
-      if not @gotData
+      if !@gotData
         $stderr << "no data received!\n" if $debug
         return
       end
@@ -157,7 +157,7 @@ module CharDet
       if $debug
         $stderr << "no probers hit minimum threshhold\n" if $debug
         for prober in @charSetProbers[0]._mProbers
-          next if not prober
+          next if !prober
           $stderr << "#{prober.get_charset_name} confidence = #{prober.get_confidence}\n" if $debug
         end
       end

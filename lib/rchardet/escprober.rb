@@ -42,7 +42,7 @@ module CharDet
     def reset
       super()
       for codingSM in @codingSM
-        next if not codingSM
+        next if !codingSM
         codingSM.active = true
         codingSM.reset()
       end

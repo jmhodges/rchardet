@@ -64,11 +64,11 @@ module CharDet
     end
 
     def feed(aBuf)
-      if not @model['keepEnglishLetter']
+      if !@model['keepEnglishLetter']
         aBuf = filter_without_english_letters(aBuf)
       end
       aLen = aBuf.length
-      if not aLen
+      if aLen != 0
         return get_state()
       end
       aBuf.each_byte do |b|
@@ -81,7 +81,7 @@ module CharDet
           @freqChar += 1
           if @lastOrder < SAMPLE_SIZE
             @totalSeqs += 1
-            if not @reversed
+            if !@reversed
               @seqCounters[@model['precedenceMatrix'][(@lastOrder * SAMPLE_SIZE) + order]] += 1
             else # reverse the order of the letters in the lookup
               @seqCounters[@model['precedenceMatrix'][(order * SAMPLE_SIZE) + @lastOrder]] += 1

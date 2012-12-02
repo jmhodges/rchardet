@@ -181,10 +181,9 @@ module CharDet
     end
   end
 
-
   class SJISContextAnalysis < JapaneseContextAnalysis
     def get_order(aStr)
-      return -1, 1 if not aStr
+      return -1, 1 if aStr.nil? || aStr == ""
       # find out current char's byte length
       first = aStr[0, 1]
       if ((first >= "\x81") and (first <= "\x9F")) or ((first >= "\xE0") and (first <= "\xFC"))
