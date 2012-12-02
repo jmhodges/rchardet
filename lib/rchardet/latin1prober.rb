@@ -73,7 +73,7 @@ module CharDet
     ASV, ASV, ASV, ASV, ASV, ASV, ASV, ASV,   # E8 - EF
     ASO, ASO, ASV, ASV, ASV, ASV, ASV, OTH,   # F0 - F7
     ASV, ASV, ASV, ASV, ASV, ASO, ASO, ASO,   # F8 - FF
-  ]
+  ].freeze
 
   # 0 : illegal 
   # 1 : very unlikely 
@@ -89,7 +89,7 @@ module CharDet
     0,  3,  3,  3,  3,  3,  3,  3,  # ACO
     0,  3,  1,  3,  1,  1,  1,  3,  # ASV
     0,  3,  1,  3,  1,  1,  3,  3,  # ASO
-  ]
+  ].freeze
 
   class Latin1Prober < CharSetProber
     def initialize
