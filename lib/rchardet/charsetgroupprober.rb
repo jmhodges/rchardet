@@ -41,41 +41,41 @@ module CharDet
       @_mActiveNum = 0
 
       for prober in @_mProbers
-	if prober
-	  prober.reset()
-	  prober.active = true
-	  @_mActiveNum += 1
-	end
+        if prober
+          prober.reset()
+          prober.active = true
+          @_mActiveNum += 1
+        end
       end
       @_mBestGuessProber = nil
     end
 
     def get_charset_name
       if not @_mBestGuessProber
-	get_confidence()
-	return nil unless @_mBestGuessProber
-	#                self._mBestGuessProber = self._mProbers[0]
+        get_confidence()
+        return nil unless @_mBestGuessProber
+        #                self._mBestGuessProber = self._mProbers[0]
       end
       return @_mBestGuessProber.get_charset_name()
     end
 
     def feed(aBuf)
       for prober in @_mProbers
-	next unless prober
-	next unless prober.active
-	st = prober.feed(aBuf)
-	next unless st
-	if st == EFoundIt
-	  @_mBestGuessProber = prober
-	  return get_state()
-	elsif st == ENotMe
-	  prober.active = false
-	  @_mActiveNum -= 1
-	  if @_mActiveNum <= 0
-	    @_mState = ENotMe
-	    return get_state()
-	  end
-	end
+        next unless prober
+        next unless prober.active
+        st = prober.feed(aBuf)
+        next unless st
+        if st == EFoundIt
+          @_mBestGuessProber = prober
+          return get_state()
+        elsif st == ENotMe
+          prober.active = false
+          @_mActiveNum -= 1
+          if @_mActiveNum <= 0
+            @_mState = ENotMe
+            return get_state()
+          end
+        end
       end
       return get_state()
     end
@@ -83,24 +83,24 @@ module CharDet
     def get_confidence()
       st = get_state()
       if st == EFoundIt
-	return 0.99
+        return 0.99
       elsif st == ENotMe
-	return 0.01
+        return 0.01
       end
       bestConf = 0.0
       @_mBestGuessProber = nil
       for prober in @_mProbers
-	next unless prober
-	unless prober.active
-	  $stderr << "#{prober.get_charset_name()} not active\n" if $debug
-	  next
-	end
-	cf = prober.get_confidence()
-	$stderr << "#{prober.get_charset_name} confidence = #{cf}\n" if $debug
-	if bestConf < cf
-	  bestConf = cf
-	  @_mBestGuessProber = prober
-	end
+        next unless prober
+        unless prober.active
+          $stderr << "#{prober.get_charset_name()} not active\n" if $debug
+          next
+        end
+        cf = prober.get_confidence()
+        $stderr << "#{prober.get_charset_name} confidence = #{cf}\n" if $debug
+        if bestConf < cf
+          bestConf = cf
+          @_mBestGuessProber = prober
+        end
       end
       return 0.0 unless @_mBestGuessProber
       return bestConf

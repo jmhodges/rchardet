@@ -33,14 +33,14 @@ module CharDet
     def initialize
       super
       @_mProbers = [ 
-	UTF8Prober.new,
-	SJISProber.new,
-	EUCJPProber.new,
-	GB2312Prober.new,
-	EUCKRProber.new,
-	Big5Prober.new,
-	EUCTWProber.new
-      ]
+                    UTF8Prober.new,
+                    SJISProber.new,
+                    EUCJPProber.new,
+                    GB2312Prober.new,
+                    EUCKRProber.new,
+                    Big5Prober.new,
+                    EUCTWProber.new
+                   ]
       reset()
     end
   end

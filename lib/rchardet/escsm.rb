@@ -73,11 +73,11 @@ module CharDet
   HZCharLenTable = [0, 0, 0, 0, 0, 0]
 
   HZSMModel = {'classTable' => HZ_cls,
-	     'classFactor' => 6,
-	     'stateTable' => HZ_st,
-	     'charLenTable' => HZCharLenTable,
-	     'name' => "HZ-GB-2312"
-}
+    'classFactor' => 6,
+    'stateTable' => HZ_st,
+    'charLenTable' => HZCharLenTable,
+    'name' => "HZ-GB-2312"
+  }
 
 ISO2022CN_cls = [
 2,0,0,0,0,0,0,0,  # 00 - 07 
@@ -128,11 +128,11 @@ EError,EError,EError,EError,EError,EItsMe,EError,EStart,# 38-3f
 ISO2022CNCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 ISO2022CNSMModel = {'classTable' => ISO2022CN_cls,
-		    'classFactor' => 9,
-		    'stateTable' => ISO2022CN_st,
-		    'charLenTable' => ISO2022CNCharLenTable,
-		    'name' => "ISO-2022-CN"
-}
+    'classFactor' => 9,
+    'stateTable' => ISO2022CN_st,
+    'charLenTable' => ISO2022CNCharLenTable,
+    'name' => "ISO-2022-CN"
+  }
 
 ISO2022JP_cls = [
 2,0,0,0,0,0,0,0,  # 00 - 07 
@@ -184,11 +184,11 @@ EError,EError,EError,EError,EItsMe,EError,EStart,EStart,# 40-47
 ISO2022JPCharLenTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 ISO2022JPSMModel = {'classTable' => ISO2022JP_cls,
-		    'classFactor' => 10,
-		    'stateTable' => ISO2022JP_st,
-		    'charLenTable' => ISO2022JPCharLenTable,
-		    'name' => "ISO-2022-JP"
-}
+    'classFactor' => 10,
+    'stateTable' => ISO2022JP_st,
+    'charLenTable' => ISO2022JPCharLenTable,
+    'name' => "ISO-2022-JP"
+  }
 
 ISO2022KR_cls = [
 2,0,0,0,0,0,0,0,  # 00 - 07 
@@ -236,9 +236,9 @@ EError,EError,EError,EItsMe,EStart,EStart,EStart,EStart,# 20-27
 ISO2022KRCharLenTable = [0, 0, 0, 0, 0, 0]
 
 ISO2022KRSMModel = {'classTable' => ISO2022KR_cls,
-		    'classFactor' => 6,
-		    'stateTable' => ISO2022KR_st,
-		    'charLenTable' => ISO2022KRCharLenTable,
-		    'name' => "ISO-2022-KR"
-}
+    'classFactor' => 6,
+    'stateTable' => ISO2022KR_st,
+    'charLenTable' => ISO2022KRCharLenTable,
+    'name' => "ISO-2022-KR"
+  }
 end

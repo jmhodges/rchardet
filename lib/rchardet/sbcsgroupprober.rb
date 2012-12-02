@@ -32,20 +32,20 @@ module CharDet
     def initialize
       super
       @_mProbers = [ 
-	SingleByteCharSetProber.new(Win1251CyrillicModel),
-	SingleByteCharSetProber.new(Koi8rModel),
-	SingleByteCharSetProber.new(Latin5CyrillicModel),
-	SingleByteCharSetProber.new(MacCyrillicModel),
-	SingleByteCharSetProber.new(Ibm866Model),
-	SingleByteCharSetProber.new(Ibm855Model),
-	SingleByteCharSetProber.new(Latin7GreekModel),
-	SingleByteCharSetProber.new(Win1253GreekModel),
-	SingleByteCharSetProber.new(Latin5BulgarianModel),
-	SingleByteCharSetProber.new(Win1251BulgarianModel),
-	SingleByteCharSetProber.new(Latin2HungarianModel),
-	SingleByteCharSetProber.new(Win1250HungarianModel),
-	SingleByteCharSetProber.new(TIS620ThaiModel),
-      ]
+                    SingleByteCharSetProber.new(Win1251CyrillicModel),
+                    SingleByteCharSetProber.new(Koi8rModel),
+                    SingleByteCharSetProber.new(Latin5CyrillicModel),
+                    SingleByteCharSetProber.new(MacCyrillicModel),
+                    SingleByteCharSetProber.new(Ibm866Model),
+                    SingleByteCharSetProber.new(Ibm855Model),
+                    SingleByteCharSetProber.new(Latin7GreekModel),
+                    SingleByteCharSetProber.new(Win1253GreekModel),
+                    SingleByteCharSetProber.new(Latin5BulgarianModel),
+                    SingleByteCharSetProber.new(Win1251BulgarianModel),
+                    SingleByteCharSetProber.new(Latin2HungarianModel),
+                    SingleByteCharSetProber.new(Win1250HungarianModel),
+                    SingleByteCharSetProber.new(TIS620ThaiModel),
+                   ]
       hebrewProber = HebrewProber.new()
       logicalHebrewProber = SingleByteCharSetProber.new(Win1255HebrewModel, false, hebrewProber)
       visualHebrewProber = SingleByteCharSetProber.new(Win1255HebrewModel, true, hebrewProber)
