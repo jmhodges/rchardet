@@ -1,6 +1,7 @@
 require 'rubygems'
+require 'rubygems/package_task'
 require 'rake/testtask'
-require 'rake/gempackagetask'
+
 begin
   require 'lib/rchardet'
 rescue LoadError
@@ -18,12 +19,16 @@ spec = Gem::Specification.new do |s|
   s.summary    = "Character encoding auto-detection in Ruby. As smart as your browser. Open source."
   s.files      = FileList["lib/**/*"]
   s.require_path      = "lib"
-  # s.autorequire       = "feedparser" # tHe 3vil according to Why.
   s.has_rdoc          = false # TODO: fix
   s.extra_rdoc_files  = ['README', 'COPYING']
   s.rubyforge_project = 'rchardet'
 
 end
 
-Rake::GemPackageTask.new(spec) do
+Gem::PackageTask.new(spec) do |pkg|
+
+end
+
+Rake::TestTask.new do |t|
+  t.test_files = FileList['test/*_test.rb']
 end
