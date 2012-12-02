@@ -62,9 +62,9 @@ module CharDet
       return if @done
 
       aLen = aBuf.length
-      return if not aLen
+      return if aLen == 0
 
-      if not @gotData
+      if !@gotData
         # If the data starts with BOM, we know it is UTF
         if aBuf[0, 3] == "\xEF\xBB\xBF"
           # EF BB BF  UTF-8 with BOM
