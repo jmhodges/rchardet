@@ -34,7 +34,8 @@ module CharDet
   EHighbyte = 2
 
   class UniversalDetector
-    attr_accessor :result
+    attr_reader :done, :result
+
     def initialize
       @highBitDetector = /[\x80-\xFF]/
       @escDetector = /(\033|\~\{)/

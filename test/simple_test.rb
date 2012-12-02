@@ -1,10 +1,10 @@
 require 'test/unit'
-require File.dirname( __FILE__ ) + '/../lib/rchardet'
+require File.dirname(__FILE__) + '/../lib/rchardet'
 
-class TestCharDet < Test::Unit::TestCase
+class SimpleTest < Test::Unit::TestCase
 
   def assert_chardet_spec_detect(file, expected)
-    content = File.open("test/asset/#{file}.txt", 'rb'){|io| io.read }
+    content = File.open("test/simple_assets/#{file}.txt", 'rb'){|io| io.read }
     assert_equal expected, CharDet.detect(content)
   end
 
