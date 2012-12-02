@@ -30,8 +30,8 @@ module CharDet
   class GB2312Prober < MultiByteCharSetProber
     def initialize
       super
-      @_mCodingSM = CodingStateMachine.new(GB2312SMModel)
-      @_mDistributionAnalyzer = GB2312DistributionAnalysis.new()
+      @codingSM = CodingStateMachine.new(GB2312SMModel)
+      @distributionAnalyzer = GB2312DistributionAnalysis.new()
       reset()
     end
 

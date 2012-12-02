@@ -32,14 +32,14 @@ module CharDet
   class UTF8Prober < CharSetProber
     def initialize
       super()
-      @_mCodingSM = CodingStateMachine.new(UTF8SMModel)
+      @codingSM = CodingStateMachine.new(UTF8SMModel)
       reset()
     end
 
     def reset
       super()
-      @_mCodingSM.reset()
-      @_mNumOfMBChar = 0
+      @codingSM.reset()
+      @numOfMBChar = 0
     end
 
     def get_charset_name
@@ -49,23 +49,23 @@ module CharDet
     def feed(aBuf)
       aBuf.each_byte do |b|
         c = b.chr
-        codingState = @_mCodingSM.next_state(c)
+        codingState = @codingSM.next_state(c)
         if codingState == EError
-          @_mState = ENotMe
+          @state = ENotMe
           break
         elsif codingState == EItsMe
-          @_mState = EFoundIt
+          @state = EFoundIt
           break
         elsif codingState == EStart
-          if @_mCodingSM.get_current_charlen() >= 2
-            @_mNumOfMBChar += 1
+          if @codingSM.get_current_charlen() >= 2
+            @numOfMBChar += 1
           end
         end
       end
 
       if get_state() == EDetecting
         if get_confidence() > SHORTCUT_THRESHOLD
-          @_mState = EFoundIt
+          @state = EFoundIt
         end
       end
 
@@ -74,8 +74,8 @@ module CharDet
 
     def get_confidence
       unlike = 0.99
-      if @_mNumOfMBChar < 6
-        for i in (0...@_mNumOfMBChar)
+      if @numOfMBChar < 6
+        for i in (0...@numOfMBChar)
           unlike = unlike * ONE_CHAR_PROB
         end
         return 1.0 - unlike

@@ -32,20 +32,20 @@ module CharDet
   class MultiByteCharSetProber < CharSetProber
     def initialize
       super
-      @_mDistributionAnalyzer = nil
-      @_mCodingSM = nil
-      @_mLastChar = "\x00\x00"
+      @distributionAnalyzer = nil
+      @codingSM = nil
+      @lastChar = "\x00\x00"
     end
 
     def reset
       super
-      if @_mCodingSM
-        @_mCodingSM.reset()
+      if @codingSM
+        @codingSM.reset()
       end
-      if @_mDistributionAnalyzer
-        @_mDistributionAnalyzer.reset()
+      if @distributionAnalyzer
+        @distributionAnalyzer.reset()
       end
-      @_mLastChar = "\x00\x00"
+      @lastChar = "\x00\x00"
     end
 
     def get_charset_name
@@ -54,36 +54,36 @@ module CharDet
     def feed(aBuf)
       aLen = aBuf.length
       for i in (0...aLen)
-        codingState = @_mCodingSM.next_state(aBuf[i..i])
+        codingState = @codingSM.next_state(aBuf[i..i])
         if codingState == EError
           $stderr << "#{get_charset_name} prober hit error at byte #{i}\n" if $debug
-          @_mState = ENotMe
+          @state = ENotMe
           break
         elsif codingState == EItsMe
-          @_mState = EFoundIt
+          @state = EFoundIt
           break
         elsif codingState == EStart
-          charLen = @_mCodingSM.get_current_charlen()
+          charLen = @codingSM.get_current_charlen()
           if i == 0
-            @_mLastChar[1] = aBuf[0..0]
-            @_mDistributionAnalyzer.feed(@_mLastChar, charLen)
+            @lastChar[1] = aBuf[0..0]
+            @distributionAnalyzer.feed(@lastChar, charLen)
           else
-            @_mDistributionAnalyzer.feed(aBuf[i-1...i+1], charLen)
+            @distributionAnalyzer.feed(aBuf[i-1...i+1], charLen)
           end
         end
       end
-      @_mLastChar[0] = aBuf[aLen-1..aLen-1]
+      @lastChar[0] = aBuf[aLen-1..aLen-1]
 
       if get_state() == EDetecting
-        if @_mDistributionAnalyzer.got_enough_data() and (get_confidence() > SHORTCUT_THRESHOLD)
-          @_mState = EFoundIt
+        if @distributionAnalyzer.got_enough_data() and (get_confidence() > SHORTCUT_THRESHOLD)
+          @state = EFoundIt
         end
       end
       return get_state()
     end
 
     def get_confidence
-      return @_mDistributionAnalyzer.get_confidence()
+      return @distributionAnalyzer.get_confidence()
     end
   end
 end

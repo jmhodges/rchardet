@@ -31,7 +31,7 @@ module CharDet
   class SBCSGroupProber < CharSetGroupProber
     def initialize
       super
-      @_mProbers = [ 
+      @probers = [ 
                     SingleByteCharSetProber.new(Win1251CyrillicModel),
                     SingleByteCharSetProber.new(Koi8rModel),
                     SingleByteCharSetProber.new(Latin5CyrillicModel),
@@ -50,7 +50,7 @@ module CharDet
       logicalHebrewProber = SingleByteCharSetProber.new(Win1255HebrewModel, false, hebrewProber)
       visualHebrewProber = SingleByteCharSetProber.new(Win1255HebrewModel, true, hebrewProber)
       hebrewProber.set_model_probers(logicalHebrewProber, visualHebrewProber)
-      @_mProbers += [hebrewProber, logicalHebrewProber, visualHebrewProber]
+      @probers += [hebrewProber, logicalHebrewProber, visualHebrewProber]
 
       reset()
     end

@@ -34,7 +34,7 @@ module CharDet
     end
 
     def reset
-      @_mState = EDetecting
+      @state = EDetecting
     end
 
     def get_charset_name
@@ -45,7 +45,7 @@ module CharDet
     end
 
     def get_state
-      return @_mState
+      return @state
     end
 
     def get_confidence

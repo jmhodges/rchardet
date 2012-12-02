@@ -150,25 +150,25 @@ module CharDet
   class HebrewProber < CharSetProber
     def initialize
       super()
-      @_mLogicalProber = nil
-      @_mVisualProber = nil
+      @logicalProber = nil
+      @visualProber = nil
       reset()
     end
 
     def reset
-      @_mFinalCharLogicalScore = 0
-      @_mFinalCharVisualScore = 0
+      @finalCharLogicalScore = 0
+      @finalCharVisualScore = 0
       # The two last characters seen in the previous buffer,
       # mPrev and mBeforePrev are initialized to space in order to simulate a word 
       # delimiter at the beginning of the data
-      @_mPrev = ' '
-      @_mBeforePrev = ' '
+      @prev = ' '
+      @beforePrev = ' '
       # These probers are owned by the group prober.
     end
 
     def set_model_probers(logicalProber, visualProber)
-      @_mLogicalProber = logicalProber
-      @_mVisualProber = visualProber
+      @logicalProber = logicalProber
+      @visualProber = visualProber
     end
 
     def is_final(c)
@@ -224,25 +224,25 @@ module CharDet
       for cur in aBuf.split(' ')
         if cur == ' '
           # We stand on a space - a word just ended
-          if @_mBeforePrev != ' '
+          if @beforePrev != ' '
             # next-to-last char was not a space so self._mPrev is not a 1 letter word
-            if is_final(@_mPrev)
+            if is_final(@prev)
               # case (1) [-2:not space][-1:final letter][cur:space]
-              @_mFinalCharLogicalScore += 1
-            elsif is_non_final(@_mPrev)
+              @finalCharLogicalScore += 1
+            elsif is_non_final(@prev)
               # case (2) [-2:not space][-1:Non-Final letter][cur:space]
-              @_mFinalCharVisualScore += 1
+              @finalCharVisualScore += 1
             end
           end
         else
           # Not standing on a space
-          if (@_mBeforePrev == ' ') and (is_final(@_mPrev)) and (cur != ' ')
+          if (@beforePrev == ' ') and (is_final(@prev)) and (cur != ' ')
             # case (3) [-2:space][-1:final letter][cur:not space]
-            @_mFinalCharVisualScore += 1
+            @finalCharVisualScore += 1
           end
         end
-        @_mBeforePrev = @_mPrev
-        @_mPrev = cur
+        @beforePrev = @prev
+        @prev = cur
       end
 
       # Forever detecting, till the end or until both model probers return eNotMe (handled above)
@@ -252,7 +252,7 @@ module CharDet
     def get_charset_name
       # Make the decision: is it Logical or Visual?
       # If the final letter score distance is dominant enough, rely on it.
-      finalsub = @_mFinalCharLogicalScore - @_mFinalCharVisualScore
+      finalsub = @finalCharLogicalScore - @finalCharVisualScore
       if finalsub >= MIN_FINAL_CHAR_DISTANCE
         return LOGICAL_HEBREW_NAME
       end
@@ -261,7 +261,7 @@ module CharDet
       end
 
       # It's not dominant enough, try to rely on the model scores instead.
-      modelsub = @_mLogicalProber.get_confidence() - @_mVisualProber.get_confidence()
+      modelsub = @logicalProber.get_confidence() - @visualProber.get_confidence()
       if modelsub > MIN_MODEL_DISTANCE
         return LOGICAL_HEBREW_NAME
       end
@@ -280,7 +280,7 @@ module CharDet
 
     def get_state
       # Remain active as long as any of the model probers are active.
-      if (@_mLogicalProber.get_state() == ENotMe) and (@_mVisualProber.get_state() == ENotMe)
+      if (@logicalProber.get_state() == ENotMe) and (@visualProber.get_state() == ENotMe)
         return ENotMe
       end
       return EDetecting

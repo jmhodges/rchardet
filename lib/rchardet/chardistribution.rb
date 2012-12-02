@@ -33,17 +33,17 @@ module CharDet
 
   class CharDistributionAnalysis
     def initialize
-      @_mCharToFreqOrder = nil # Mapping table to get frequency order from char order (get from GetOrder())
-      @_mTableSize = nil # Size of above table
-      @_mTypicalDistributionRatio = nil # This is a constant value which varies from language to language, used in calculating confidence.  See http://www.mozilla.org/projects/intl/UniversalCharsetDetection.html for further detail.
+      @charToFreqOrder = nil # Mapping table to get frequency order from char order (get from GetOrder())
+      @tableSize = nil # Size of above table
+      @typicalDistributionRatio = nil # This is a constant value which varies from language to language, used in calculating confidence.  See http://www.mozilla.org/projects/intl/UniversalCharsetDetection.html for further detail.
       reset()
     end
 
     def reset
       # # """reset analyser, clear any state"""
-      @_mDone = false # If this flag is set to constants.True, detection is done and conclusion has been made
-      @_mTotalChars = 0 # Total characters encountered
-      @_mFreqChars = 0 # The number of characters whose frequency order is less than 512
+      @done = false # If this flag is set to constants.True, detection is done and conclusion has been made
+      @totalChars = 0 # Total characters encountered
+      @freqChars = 0 # The number of characters whose frequency order is less than 512
     end
 
     def feed(aStr, aCharLen)
@@ -55,11 +55,11 @@ module CharDet
         order = -1
       end
       if order >= 0
-        @_mTotalChars += 1
+        @totalChars += 1
         # order is valid
-        if order < @_mTableSize
-          if 512 > @_mCharToFreqOrder[order]
-            @_mFreqChars += 1
+        if order < @tableSize
+          if 512 > @charToFreqOrder[order]
+            @freqChars += 1
           end
         end
       end
@@ -68,12 +68,12 @@ module CharDet
     def get_confidence
       # """return confidence based on existing data"""
       # if we didn't receive any character in our consideration range, return negative answer
-      if @_mTotalChars <= 0
+      if @totalChars <= 0
         return SURE_NO
       end
 
-      if @_mTotalChars != @_mFreqChars
-        r = @_mFreqChars / ((@_mTotalChars - @_mFreqChars) * @_mTypicalDistributionRatio)
+      if @totalChars != @freqChars
+        r = @freqChars / ((@totalChars - @freqChars) * @typicalDistributionRatio)
         if r < SURE_YES
           return r
         end
@@ -86,7 +86,7 @@ module CharDet
     def got_enough_data
       # It is not necessary to receive all data to draw conclusion. For charset detection,
       # certain amount of data is enough
-      return @_mTotalChars > ENOUGH_DATA_THRESHOLD
+      return @totalChars > ENOUGH_DATA_THRESHOLD
     end
 
     def get_order(aStr)
@@ -100,9 +100,9 @@ module CharDet
   class EUCTWDistributionAnalysis < CharDistributionAnalysis
     def initialize
       super()
-      @_mCharToFreqOrder = EUCTWCharToFreqOrder
-      @_mTableSize = EUCTW_TABLE_SIZE
-      @_mTypicalDistributionRatio = EUCTW_TYPICAL_DISTRIBUTION_RATIO
+      @charToFreqOrder = EUCTWCharToFreqOrder
+      @tableSize = EUCTW_TABLE_SIZE
+      @typicalDistributionRatio = EUCTW_TYPICAL_DISTRIBUTION_RATIO
     end
 
     def get_order(aStr)
@@ -121,9 +121,9 @@ module CharDet
   class EUCKRDistributionAnalysis < CharDistributionAnalysis
     def initialize
       super()
-      @_mCharToFreqOrder = EUCKRCharToFreqOrder
-      @_mTableSize = EUCKR_TABLE_SIZE
-      @_mTypicalDistributionRatio = EUCKR_TYPICAL_DISTRIBUTION_RATIO
+      @charToFreqOrder = EUCKRCharToFreqOrder
+      @tableSize = EUCKR_TABLE_SIZE
+      @typicalDistributionRatio = EUCKR_TYPICAL_DISTRIBUTION_RATIO
     end
 
     def get_order(aStr)
@@ -142,9 +142,9 @@ module CharDet
   class GB2312DistributionAnalysis < CharDistributionAnalysis
     def initialize
       super()
-      @_mCharToFreqOrder = GB2312CharToFreqOrder
-      @_mTableSize = GB2312_TABLE_SIZE
-      @_mTypicalDistributionRatio = GB2312_TYPICAL_DISTRIBUTION_RATIO
+      @charToFreqOrder = GB2312CharToFreqOrder
+      @tableSize = GB2312_TABLE_SIZE
+      @typicalDistributionRatio = GB2312_TYPICAL_DISTRIBUTION_RATIO
     end
 
     def get_order(aStr)
@@ -163,9 +163,9 @@ module CharDet
   class Big5DistributionAnalysis < CharDistributionAnalysis
     def initialize
       super
-      @_mCharToFreqOrder = Big5CharToFreqOrder
-      @_mTableSize = BIG5_TABLE_SIZE
-      @_mTypicalDistributionRatio = BIG5_TYPICAL_DISTRIBUTION_RATIO
+      @charToFreqOrder = Big5CharToFreqOrder
+      @tableSize = BIG5_TABLE_SIZE
+      @typicalDistributionRatio = BIG5_TYPICAL_DISTRIBUTION_RATIO
     end
 
     def get_order(aStr)
@@ -188,9 +188,9 @@ module CharDet
   class SJISDistributionAnalysis < CharDistributionAnalysis
     def initialize
       super()
-      @_mCharToFreqOrder = JISCharToFreqOrder
-      @_mTableSize = JIS_TABLE_SIZE
-      @_mTypicalDistributionRatio = JIS_TYPICAL_DISTRIBUTION_RATIO
+      @charToFreqOrder = JISCharToFreqOrder
+      @tableSize = JIS_TABLE_SIZE
+      @typicalDistributionRatio = JIS_TYPICAL_DISTRIBUTION_RATIO
     end
 
     def get_order(aStr)
@@ -217,9 +217,9 @@ module CharDet
   class EUCJPDistributionAnalysis < CharDistributionAnalysis
     def initialize
       super()
-      @_mCharToFreqOrder = JISCharToFreqOrder
-      @_mTableSize = JIS_TABLE_SIZE
-      @_mTypicalDistributionRatio = JIS_TYPICAL_DISTRIBUTION_RATIO
+      @charToFreqOrder = JISCharToFreqOrder
+      @tableSize = JIS_TABLE_SIZE
+      @typicalDistributionRatio = JIS_TYPICAL_DISTRIBUTION_RATIO
     end
 
     def get_order(aStr)

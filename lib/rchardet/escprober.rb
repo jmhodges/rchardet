@@ -30,7 +30,7 @@ module CharDet
   class EscCharSetProber < CharSetProber
     def initialize
       super()
-      @_mCodingSM = [ 
+      @codingSM = [ 
                      CodingStateMachine.new(HZSMModel),
                      CodingStateMachine.new(ISO2022CNSMModel),
                      CodingStateMachine.new(ISO2022JPSMModel),
@@ -41,21 +41,21 @@ module CharDet
 
     def reset
       super()
-      for codingSM in @_mCodingSM
+      for codingSM in @codingSM
         next if not codingSM
         codingSM.active = true
         codingSM.reset()
       end
-      @_mActiveSM = @_mCodingSM.length
-      @_mDetectedCharset = nil
+      @activeSM = @codingSM.length
+      @detectedCharset = nil
     end
 
     def get_charset_name
-      return @_mDetectedCharset
+      return @detectedCharset
     end
 
     def get_confidence
-      if @_mDetectedCharset
+      if @detectedCharset
         return 0.99
       else
         return 0.00
@@ -65,20 +65,20 @@ module CharDet
     def feed(aBuf)
       aBuf.each_byte do |b|
         c = b.chr
-        for codingSM in @_mCodingSM
+        for codingSM in @codingSM
           next unless codingSM
           next unless codingSM.active
           codingState = codingSM.next_state(c)
           if codingState == EError
             codingSM.active = false
-            @_mActiveSM -= 1
-            if @_mActiveSM <= 0
-              @_mState = ENotMe
+            @activeSM -= 1
+            if @activeSM <= 0
+              @state = ENotMe
               return get_state()
             end
           elsif codingState == EItsMe
-            @_mState = EFoundIt
-            @_mDetectedCharset = codingSM.get_coding_state_machine()
+            @state = EFoundIt
+            @detectedCharset = codingSM.get_coding_state_machine()
             return get_state()
           end
         end

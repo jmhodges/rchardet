@@ -30,15 +30,15 @@ module CharDet
   class SJISProber < MultiByteCharSetProber
     def initialize
       super()
-      @_mCodingSM = CodingStateMachine.new(SJISSMModel)
-      @_mDistributionAnalyzer = SJISDistributionAnalysis.new()
-      @_mContextAnalyzer = SJISContextAnalysis.new()
+      @codingSM = CodingStateMachine.new(SJISSMModel)
+      @distributionAnalyzer = SJISDistributionAnalysis.new()
+      @contextAnalyzer = SJISContextAnalysis.new()
       reset()
     end
 
     def reset
       super()
-      @_mContextAnalyzer.reset()
+      @contextAnalyzer.reset()
     end
 
     def get_charset_name
@@ -48,32 +48,32 @@ module CharDet
     def feed(aBuf)
       aLen = aBuf.length
       for i in (0...aLen)
-        codingState = @_mCodingSM.next_state(aBuf[i..i])
+        codingState = @codingSM.next_state(aBuf[i..i])
         if codingState == EError
           $stderr << "#{get_charset_name} prober hit error at byte #{i}\n" if $debug
-          @_mState = ENotMe
+          @state = ENotMe
           break
         elsif codingState == EItsMe
-          @_mState = EFoundIt
+          @state = EFoundIt
           break
         elsif codingState == EStart
-          charLen = @_mCodingSM.get_current_charlen()
+          charLen = @codingSM.get_current_charlen()
           if i == 0
-            @_mLastChar[1] = aBuf[0..0]
-            @_mContextAnalyzer.feed(@_mLastChar[2 - charLen..-1], charLen)
-            @_mDistributionAnalyzer.feed(@_mLastChar, charLen)
+            @lastChar[1] = aBuf[0..0]
+            @contextAnalyzer.feed(@lastChar[2 - charLen..-1], charLen)
+            @distributionAnalyzer.feed(@lastChar, charLen)
           else
-            @_mContextAnalyzer.feed(aBuf[i + 1 - charLen ... i + 3 - charLen], charLen)
-            @_mDistributionAnalyzer.feed(aBuf[i - 1 ... i + 1], charLen)
+            @contextAnalyzer.feed(aBuf[i + 1 - charLen ... i + 3 - charLen], charLen)
+            @distributionAnalyzer.feed(aBuf[i - 1 ... i + 1], charLen)
           end
         end
       end
 
-      @_mLastChar[0] = aBuf[aLen - 1.. aLen-1]
+      @lastChar[0] = aBuf[aLen - 1.. aLen-1]
 
       if get_state() == EDetecting
-        if @_mContextAnalyzer.got_enough_data() and (get_confidence() > SHORTCUT_THRESHOLD)
-          @_mState = EFoundIt
+        if @contextAnalyzer.got_enough_data() and (get_confidence() > SHORTCUT_THRESHOLD)
+          @state = EFoundIt
         end
       end
 
@@ -81,7 +81,7 @@ module CharDet
     end
 
     def get_confidence
-      l = [@_mContextAnalyzer.get_confidence(), @_mDistributionAnalyzer.get_confidence()]
+      l = [@contextAnalyzer.get_confidence(), @distributionAnalyzer.get_confidence()]
       return l.max
     end
   end

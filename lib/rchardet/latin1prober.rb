@@ -98,8 +98,8 @@ module CharDet
     end
 
     def reset
-      @_mLastCharClass = OTH
-      @_mFreqCounter = [0] * FREQ_CAT_NUM
+      @lastCharClass = OTH
+      @freqCounter = [0] * FREQ_CAT_NUM
       super
     end
 
@@ -112,13 +112,13 @@ module CharDet
       aBuf.each_byte do |b|
         c = b.chr
         charClass = Latin1_CharToClass[c[0]]
-        freq = Latin1ClassModel[(@_mLastCharClass * CLASS_NUM) + charClass]
+        freq = Latin1ClassModel[(@lastCharClass * CLASS_NUM) + charClass]
         if freq == 0
-          @_mState = ENotMe
+          @state = ENotMe
           break
         end
-        @_mFreqCounter[freq] += 1
-        @_mLastCharClass = charClass
+        @freqCounter[freq] += 1
+        @lastCharClass = charClass
       end
 
       return get_state()
@@ -129,11 +129,11 @@ module CharDet
         return 0.01
       end
 
-      total = @_mFreqCounter.inject{|a,b| a+b} 
+      total = @freqCounter.inject{|a,b| a+b} 
       if total < 0.01
         confidence = 0.0
       else
-        confidence = (@_mFreqCounter[3] / total) - (@_mFreqCounter[1] * 20.0 / total)
+        confidence = (@freqCounter[3] / total) - (@freqCounter[1] * 20.0 / total)
       end
       if confidence < 0.0
         confidence = 0.0

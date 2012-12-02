@@ -31,36 +31,36 @@ module CharDet
     attr_accessor :active
 
     def initialize(sm)
-      @_mModel = sm
-      @_mCurrentBytePos = 0
-      @_mCurrentCharLen = 0
+      @model = sm
+      @currentBytePos = 0
+      @currentCharLen = 0
       reset()
     end
 
     def reset
-      @_mCurrentState = EStart
+      @currentState = EStart
     end
 
     def next_state(c)
       # for each byte we get its class
       # if it is first byte, we also get byte length
-      byteCls = @_mModel['classTable'][c[0]]
-      if @_mCurrentState == EStart
-        @_mCurrentBytePos = 0
-        @_mCurrentCharLen = @_mModel['charLenTable'][byteCls]
+      byteCls = @model['classTable'][c[0]]
+      if @currentState == EStart
+        @currentBytePos = 0
+        @currentCharLen = @model['charLenTable'][byteCls]
       end
       # from byte's class and stateTable, we get its next state
-      @_mCurrentState = @_mModel['stateTable'][@_mCurrentState * @_mModel['classFactor'] + byteCls]
-      @_mCurrentBytePos += 1
-      return @_mCurrentState
+      @currentState = @model['stateTable'][@currentState * @model['classFactor'] + byteCls]
+      @currentBytePos += 1
+      return @currentState
     end
 
     def get_current_charlen
-      return @_mCurrentCharLen
+      return @currentCharLen
     end
 
     def get_coding_state_machine
-      return @_mModel['name']
+      return @model['name']
     end
   end
 end

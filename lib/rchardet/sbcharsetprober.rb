@@ -40,31 +40,31 @@ module CharDet
   class SingleByteCharSetProber < CharSetProber
     def initialize(model, reversed=false, nameProber=nil)
       super()
-      @_mModel = model
-      @_mReversed = reversed # TRUE if we need to reverse every pair in the model lookup
-      @_mNameProber = nameProber # Optional auxiliary prober for name decision
+      @model = model
+      @reversed = reversed # TRUE if we need to reverse every pair in the model lookup
+      @nameProber = nameProber # Optional auxiliary prober for name decision
       reset()
     end
 
     def reset
       super()
-      @_mLastOrder = 255 # char order of last character
-      @_mSeqCounters = [0] * NUMBER_OF_SEQ_CAT
-      @_mTotalSeqs = 0
-      @_mTotalChar = 0
-      @_mFreqChar = 0 # characters that fall in our sampling range
+      @lastOrder = 255 # char order of last character
+      @seqCounters = [0] * NUMBER_OF_SEQ_CAT
+      @totalSeqs = 0
+      @totalChar = 0
+      @freqChar = 0 # characters that fall in our sampling range
     end
 
     def get_charset_name
-      if @_mNameProber
-        return @_mNameProber.get_charset_name()
+      if @nameProber
+        return @nameProber.get_charset_name()
       else
-        return @_mModel['charsetName']
+        return @model['charsetName']
       end
     end
 
     def feed(aBuf)
-      if not @_mModel['keepEnglishLetter']
+      if not @model['keepEnglishLetter']
         aBuf = filter_without_english_letters(aBuf)
       end
       aLen = aBuf.length
@@ -73,33 +73,33 @@ module CharDet
       end
       aBuf.each_byte do |b|
         c = b.chr
-        order = @_mModel['charToOrderMap'][c[0]]
+        order = @model['charToOrderMap'][c[0]]
         if order < SYMBOL_CAT_ORDER
-          @_mTotalChar += 1
+          @totalChar += 1
         end
         if order < SAMPLE_SIZE
-          @_mFreqChar += 1
-          if @_mLastOrder < SAMPLE_SIZE
-            @_mTotalSeqs += 1
-            if not @_mReversed
-              @_mSeqCounters[@_mModel['precedenceMatrix'][(@_mLastOrder * SAMPLE_SIZE) + order]] += 1
+          @freqChar += 1
+          if @lastOrder < SAMPLE_SIZE
+            @totalSeqs += 1
+            if not @reversed
+              @seqCounters[@model['precedenceMatrix'][(@lastOrder * SAMPLE_SIZE) + order]] += 1
             else # reverse the order of the letters in the lookup
-              @_mSeqCounters[@_mModel['precedenceMatrix'][(order * SAMPLE_SIZE) + @_mLastOrder]] += 1
+              @seqCounters[@model['precedenceMatrix'][(order * SAMPLE_SIZE) + @lastOrder]] += 1
             end
           end
         end
-        @_mLastOrder = order
+        @lastOrder = order
       end
 
       if get_state() == EDetecting
-        if @_mTotalSeqs > SB_ENOUGH_REL_THRESHOLD
+        if @totalSeqs > SB_ENOUGH_REL_THRESHOLD
           cf = get_confidence()
           if cf > POSITIVE_SHORTCUT_THRESHOLD
-            $stderr << "#{@_mModel['charsetName']} confidence = #{cf}, we have a winner\n" if $debug
-            @_mState = EFoundIt
+            $stderr << "#{@model['charsetName']} confidence = #{cf}, we have a winner\n" if $debug
+            @state = EFoundIt
           elsif cf < NEGATIVE_SHORTCUT_THRESHOLD
-            $stderr << "#{@_mModel['charsetName']} confidence = #{cf}, below negative shortcut threshold #{NEGATIVE_SHORTCUT_THRESHOLD}\n" if $debug
-            @_mState = ENotMe
+            $stderr << "#{@model['charsetName']} confidence = #{cf}, below negative shortcut threshold #{NEGATIVE_SHORTCUT_THRESHOLD}\n" if $debug
+            @state = ENotMe
           end
         end
       end
@@ -109,11 +109,9 @@ module CharDet
 
     def get_confidence
       r = 0.01
-      if @_mTotalSeqs > 0
-        #            print self._mSeqCounters[POSITIVE_CAT], self._mTotalSeqs, self._mModel['mTypicalPositiveRatio']
-        r = (1.0 * @_mSeqCounters[POSITIVE_CAT]) / @_mTotalSeqs / @_mModel['mTypicalPositiveRatio']
-        #            print r, self._mFreqChar, self._mTotalChar
-        r = r * @_mFreqChar / @_mTotalChar
+      if @totalSeqs > 0
+        r = (1.0 * @seqCounters[POSITIVE_CAT]) / @totalSeqs / @model['mTypicalPositiveRatio']
+        r = r * @freqChar / @totalChar
         if r >= 1.0
           r = 0.99
         end

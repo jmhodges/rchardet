@@ -126,15 +126,15 @@ module CharDet
     end
 
     def reset
-      @_mTotalRel = 0 # total sequence received
-      @_mRelSample = [0] * NUM_OF_CATEGORY # category counters, each interger counts sequence in its category
-      @_mNeedToSkipCharNum = 0 # if last byte in current buffer is not the last byte of a character, we need to know how many bytes to skip in next buffer
-      @_mLastCharOrder = -1 # The order of previous char
-      @_mDone = false # If this flag is set to constants.True, detection is done and conclusion has been made
+      @totalRel = 0 # total sequence received
+      @relSample = [0] * NUM_OF_CATEGORY # category counters, each interger counts sequence in its category
+      @needToSkipCharNum = 0 # if last byte in current buffer is not the last byte of a character, we need to know how many bytes to skip in next buffer
+      @lastCharOrder = -1 # The order of previous char
+      @done = false # If this flag is set to constants.True, detection is done and conclusion has been made
     end
 
     def feed(aBuf, aLen)
-      return if @_mDone
+      return if @done
 
       # The buffer we got is byte oriented, and a character may span in more than one
       # buffers. In case the last one or two byte in last buffer is not complete, we 
@@ -142,35 +142,35 @@ module CharDet
       # We can choose to record those bytes as well and analyse the character once it 
       # is complete, but since a character will not make much difference, by simply skipping
       # this character will simply our logic and improve performance.
-      i = @_mNeedToSkipCharNum
+      i = @needToSkipCharNum
       while i < aLen
         order, charLen = get_order(aBuf[i...i+2])
         i += charLen
         if i > aLen
-          @_mNeedToSkipCharNum = i - aLen
-          @_mLastCharOrder = -1
+          @needToSkipCharNum = i - aLen
+          @lastCharOrder = -1
         else
-          if (order != -1) and (@_mLastCharOrder != -1)
-            @_mTotalRel += 1
-            if @_mTotalRel > MAX_REL_THRESHOLD
-              @_mDone = true
+          if (order != -1) and (@lastCharOrder != -1)
+            @totalRel += 1
+            if @totalRel > MAX_REL_THRESHOLD
+              @done = true
               break
             end
-            @_mRelSample[JP2_CHAR_CONTEXT[@_mLastCharOrder][order]] += 1
+            @relSample[JP2_CHAR_CONTEXT[@lastCharOrder][order]] += 1
           end
-          @_mLastCharOrder = order
+          @lastCharOrder = order
         end
       end
     end
 
     def got_enough_data
-      return @_mTotalRel > ENOUGH_REL_THRESHOLD
+      return @totalRel > ENOUGH_REL_THRESHOLD
     end
 
     def get_confidence
       # This is just one way to calculate confidence. It works well for me.
-      if @_mTotalRel > MINIMUM_DATA_THRESHOLD
-        return (@_mTotalRel - @_mRelSample[0]) / @_mTotalRel
+      if @totalRel > MINIMUM_DATA_THRESHOLD
+        return (@totalRel - @relSample[0]) / @totalRel
       else
         return DONT_KNOW
       end

@@ -30,8 +30,8 @@ module CharDet
   class EUCTWProber < MultiByteCharSetProber
     def initialize
       super()
-      @_mCodingSM = CodingStateMachine.new(EUCTWSMModel)
-      @_mDistributionAnalyzer = EUCTWDistributionAnalysis.new()
+      @codingSM = CodingStateMachine.new(EUCTWSMModel)
+      @distributionAnalyzer = EUCTWDistributionAnalysis.new()
       reset()
     end
 

@@ -32,7 +32,7 @@ module CharDet
   class MBCSGroupProber < CharSetGroupProber
     def initialize
       super
-      @_mProbers = [ 
+      @probers = [ 
                     UTF8Prober.new,
                     SJISProber.new,
                     EUCJPProber.new,

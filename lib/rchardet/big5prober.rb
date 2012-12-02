@@ -30,8 +30,8 @@ module CharDet
   class Big5Prober < MultiByteCharSetProber 
     def initialize
       super
-      @_mCodingSM = CodingStateMachine.new(Big5SMModel)
-      @_mDistributionAnalyzer = Big5DistributionAnalysis.new()
+      @codingSM = CodingStateMachine.new(Big5SMModel)
+      @distributionAnalyzer = Big5DistributionAnalysis.new()
       reset()
     end
 

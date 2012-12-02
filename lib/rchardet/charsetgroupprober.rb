@@ -28,52 +28,52 @@
 
 module CharDet
   class CharSetGroupProber < CharSetProber
-    attr_accessor :_mProbers
+    attr_accessor :probers
     def initialize
       super
-      @_mActiveNum = 0
-      @_mProbers = []
-      @_mBestGuessProber = nil
+      @activeNum = 0
+      @probers = []
+      @bestGuessProber = nil
     end
 
     def reset
       super
-      @_mActiveNum = 0
+      @activeNum = 0
 
-      for prober in @_mProbers
+      for prober in @probers
         if prober
           prober.reset()
           prober.active = true
-          @_mActiveNum += 1
+          @activeNum += 1
         end
       end
-      @_mBestGuessProber = nil
+      @bestGuessProber = nil
     end
 
     def get_charset_name
-      if not @_mBestGuessProber
+      if not @bestGuessProber
         get_confidence()
-        if not @_mBestGuessProber
+        if not @bestGuessProber
           return nil
         end
       end
-      return @_mBestGuessProber.get_charset_name()
+      return @bestGuessProber.get_charset_name()
     end
 
     def feed(aBuf)
-      for prober in @_mProbers
+      for prober in @probers
         next unless prober
         next unless prober.active
         st = prober.feed(aBuf)
         next unless st
         if st == EFoundIt
-          @_mBestGuessProber = prober
+          @bestGuessProber = prober
           return get_state()
         elsif st == ENotMe
           prober.active = false
-          @_mActiveNum -= 1
-          if @_mActiveNum <= 0
-            @_mState = ENotMe
+          @activeNum -= 1
+          if @activeNum <= 0
+            @state = ENotMe
             return get_state()
           end
         end
@@ -89,8 +89,8 @@ module CharDet
         return 0.01
       end
       bestConf = 0.0
-      @_mBestGuessProber = nil
-      for prober in @_mProbers
+      @bestGuessProber = nil
+      for prober in @probers
         next unless prober
         unless prober.active
           $stderr << "#{prober.get_charset_name()} not active\n" if $debug
@@ -100,10 +100,10 @@ module CharDet
         $stderr << "#{prober.get_charset_name} confidence = #{cf}\n" if $debug
         if bestConf < cf
           bestConf = cf
-          @_mBestGuessProber = prober
+          @bestGuessProber = prober
         end
       end
-      return 0.0 unless @_mBestGuessProber
+      return 0.0 unless @bestGuessProber
       return bestConf
       #        else:
       #            self._mBestGuessProber = self._mProbers[0]
