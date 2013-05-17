@@ -195,7 +195,7 @@ module CharDet
       if aStr.length > 1
         second = aStr[1, 1]
         if (first == "\202") and (second >= "\x9F") and (second <= "\xF1")
-          return aStr[1] - 0x9F, charLen
+          return aStr[1].ord - 0x9F, charLen
         end
       end
       
@@ -220,7 +220,7 @@ module CharDet
       if aStr.length > 1
         second = aStr[1, 1]
         if (first == "\xA4") and (second >= "\xA1") and (second <= "\xF3")
-          return aStr[1] - 0xA1, charLen
+          return aStr[1].ord - 0xA1, charLen
         end
       end
 

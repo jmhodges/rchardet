@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.dirname(__FILE__) + '/../lib/rchardet'
+require "./" + File.dirname(__FILE__) + '/../lib/rchardet'
 
 class SimpleTest < Test::Unit::TestCase
 
