@@ -2,12 +2,12 @@ require 'rubygems'
 require 'rubygems/package_task'
 require 'rake/testtask'
 
-begin
-  require 'lib/rchardet'
-rescue LoadError
-  module CharDet; VERSION = '0.0.0'; end
-  puts "Problem loading rfeedparser; try rake setup"
-end
+# begin
+  require './lib/rchardet.rb'
+# rescue LoadError
+#   module CharDet; VERSION = '0.0.0'; end
+#   puts "Problem loading rfeedparser; try rake setup"
+# end
 
 spec = Gem::Specification.new do |s|
   s.name       = "rchardet"

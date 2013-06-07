@@ -1,3 +1,5 @@
+# coding: ascii
+
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is Mozilla Communicator client code.
 # 
@@ -25,7 +27,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 # 02110-1301  USA
 ######################### END LICENSE BLOCK #########################
-
 module CharDet
   ENOUGH_DATA_THRESHOLD = 1024
   SURE_YES = 0.99
