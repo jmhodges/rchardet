@@ -16,7 +16,7 @@ class SimpleTest < Test::Unit::TestCase
 
   def test_detect_Shift_JIS
     assert_chardet_spec_detect 'Shift_JIS', {
-      "encoding" => 'SHIFT_JIS', "confidence" => 1
+      "encoding" => 'SHIFT_JIS', "confidence" => 0.99
     }
   end
 

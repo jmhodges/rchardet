@@ -1,3 +1,5 @@
+# coding: ASCII
+
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is Mozilla Universal charset detector code.
 #
@@ -37,7 +39,7 @@ module CharDet
     attr_reader :done, :result
 
     def initialize
-      @highBitDetector = /[\x80-\xFF]/
+      @highBitDetector = /[\x80-\xFF]/n
       @escDetector = /(\033|\~\{)/
       @escCharSetProber = nil
       @charSetProbers = []
