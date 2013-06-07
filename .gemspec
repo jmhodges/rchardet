@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'rubygems/package_task'
+require 'rake/testtask'
+
 require './lib/rchardet.rb'
 
 Gem::Specification.new do do |s|
