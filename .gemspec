@@ -4,7 +4,7 @@ require 'rake/testtask'
 
 require './lib/rchardet.rb'
 
-Gem::Specification.new do do |s|
+Gem::Specification.new do |s|
   s.name       = "rchardet"
   s.version    = CharDet::VERSION
   s.author     = "Jeff Hodges"
