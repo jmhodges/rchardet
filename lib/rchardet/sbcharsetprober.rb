@@ -73,7 +73,7 @@ module CharDet
       end
       aBuf.each_byte do |b|
         c = b.chr
-        order = @model['charToOrderMap'][c[0]]
+        order = @model['charToOrderMap'][c.bytes.first]
         if order < SYMBOL_CAT_ORDER
           @totalChar += 1
         end
