@@ -1,56 +1,54 @@
-require 'test/unit'
-require './lib/rchardet'
+require_relative "test_helper"
 
-class SimpleTest < Test::Unit::TestCase
-
+describe "Simple" do
   def assert_chardet_spec_detect(file, expected)
     content = File.open("test/simple_assets/#{file}.txt", 'rb'){|io| io.read }
     assert_equal expected, CharDet.detect(content)
   end
 
-  def test_detect_EUC_JP 
+  it "detects EUC_JP" do 
     assert_chardet_spec_detect 'EUC-JP', {
       "encoding" => 'EUC-JP', "confidence" => 0.99
     }
   end
 
-  def test_detect_Shift_JIS
+  it "detects Shift_JIS" do
     assert_chardet_spec_detect 'Shift_JIS', {
       "encoding" => 'SHIFT_JIS', "confidence" => (RUBY_VERSION > "1.8" ? 0.99 : 1) # TODO the 1.9 value might be wrong but I cannot find any bug
     }
   end
 
-  def test_detect_UTF_8
+  it "detects UTF_8" do
     assert_chardet_spec_detect 'UTF-8' , {
       "encoding" => 'utf-8', "confidence" => 0.99
     }
   end
 
-  def test_detect_eucJP_ms
+  it "detects eucJP_ms" do
     assert_chardet_spec_detect 'eucJP-ms' , {
       "encoding" => 'EUC-JP', "confidence" => 0.99
     }
   end
   
-  def test_detect_UTF_16BE
+  it "detects UTF_16BE" do
     assert_chardet_spec_detect 'UTF-16BE' , {
       "encoding" => 'UTF-16BE', "confidence" => 1
     }
   end
 
-  def test_detect_UTF_16LE
+  it "detects UTF_16LE" do
     assert_chardet_spec_detect 'UTF-16LE' , {
       "encoding" => 'UTF-16LE', "confidence" => 1
     }
   end  
 
-  def test_detect_ISO_2022_JP
+  it "detects ISO_2022_JP" do
     assert_chardet_spec_detect  'ISO-2022-JP'  , {
       "encoding" => 'ISO-2022-JP', "confidence" => 0.99
     }
   end
 
-  def test_detect_big5
+  it "detects big5" do
     assert_chardet_spec_detect  'big5'  , {
       "encoding" => 'Big5', "confidence" => 0.99
     }
