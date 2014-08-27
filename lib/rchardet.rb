@@ -15,8 +15,7 @@
 # 02110-1301  USA
 ######################### END LICENSE BLOCK #########################
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
-
+require 'rchardet/version'
 require 'rchardet/charsetprober'
 require 'rchardet/mbcharsetprober'
 
@@ -56,7 +55,6 @@ require 'rchardet/universaldetector'
 require 'rchardet/utf8prober'
 
 module CharDet
-  VERSION = "1.3.2"
   def CharDet.detect(aBuf)
     u = UniversalDetector.new
     u.reset
