@@ -14,7 +14,7 @@ describe "Simple" do
 
   it "detects Shift_JIS" do
     assert_chardet_spec_detect 'Shift_JIS', {
-      "encoding" => 'SHIFT_JIS', "confidence" => (RUBY_VERSION > "1.8" ? 0.99 : 1) # TODO the 1.9 value might be wrong but I cannot find any bug
+      "encoding" => 'SHIFT_JIS', "confidence" => (RUBY_VERSION > "1.9.3" ? 0.99 : 1) # TODO the 1.9 value might be wrong but I cannot find any bug
     }
   end
 
