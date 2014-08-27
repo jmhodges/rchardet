@@ -6,6 +6,14 @@ describe "Simple" do
     assert_equal expected, CharDet.detect(content)
   end
 
+  def pending
+    yield
+  rescue StandardError
+    skip
+  else
+    raise "Fixed"
+  end
+
   it "detects EUC_JP" do 
     assert_chardet_spec_detect 'EUC-JP', {
       "encoding" => 'EUC-JP', "confidence" => 0.99
@@ -52,5 +60,11 @@ describe "Simple" do
     assert_chardet_spec_detect  'big5'  , {
       "encoding" => 'Big5', "confidence" => 0.99
     }
+  end
+
+  it "does not blow up on invalid encoding" do
+    pending do
+      CharDet.detect("bad encoding: \xc3\x28")
+    end
   end
 end
