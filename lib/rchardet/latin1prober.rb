@@ -111,7 +111,7 @@ module CharDet
       aBuf = filter_with_english_letters(aBuf)
       aBuf.each_byte do |b|
         c = b.chr
-        charClass = Latin1_CharToClass[c[0]]
+        charClass = Latin1_CharToClass[c.bytes.first]
         freq = Latin1ClassModel[(@lastCharClass * CLASS_NUM) + charClass]
         if freq == 0
           @state = ENotMe
