@@ -16,8 +16,6 @@ encoding = cd['encoding']
 confidence = cd['confidence'] # 0.0 <= confidence <= 1.0
 ```
 
-Authors
-=======
 ### [Contributors](http://github.com/grosser/pru/contributors)
  - [Jeff Hodges](http://github.com/jmhodges)
  - [Denis Savitsky](https://github.com/sadfuzzy)
