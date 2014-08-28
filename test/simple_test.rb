@@ -1,3 +1,4 @@
+# encoding: utf-8
 require_relative "test_helper"
 
 describe "Simple" do
@@ -63,8 +64,8 @@ describe "Simple" do
   end
 
   it "does not blow up on invalid encoding" do
-    pending do
-      CharDet.detect("bad encoding: \xc3\x28")
-    end
+    bad = "bad encoding: \xc3\x28"
+    CharDet.detect(bad)["encoding"].must_equal "ISO-8859-2"
+    bad.encoding.must_equal Encoding::UTF_8
   end
 end
