@@ -63,6 +63,11 @@ describe "Simple" do
     }
   end
 
+  it "detects russian" do
+    # this failed when using $KCODE='u' on 1.8 ... just making sure it stays put
+    CharDet.detect("Toto je zpr\xE1va ve form\xE1tu MIME s n\xECkolika \xE8\xE1stmi.\n")["encoding"].must_equal "windows-1251"
+  end
+
   it "does not blow up on invalid encoding" do
     bad = "bad encoding: \xc3\x28"
     CharDet.detect(bad)["encoding"].must_equal "ISO-8859-2"
