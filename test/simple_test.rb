@@ -73,4 +73,10 @@ describe "Simple" do
     CharDet.detect(bad)["encoding"].must_equal "ISO-8859-2"
     bad.encoding.must_equal Encoding::UTF_8
   end
+
+  it "does not blow up on multibyte UTF-8 chars" do
+    accented = "Juan Pérez"
+    CharDet.detect(accented)["encoding"].must_equal "ISO-8859-2"
+    accented.encoding.must_equal Encoding::UTF_8
+  end
 end
