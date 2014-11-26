@@ -56,7 +56,7 @@ require 'rchardet/utf8prober'
 
 module CharDet
   def CharDet.detect(aBuf)
-    aBuf = aBuf.dup.force_encoding(Encoding::BINARY) unless aBuf.valid_encoding?
+    aBuf = aBuf.dup.force_encoding(Encoding::BINARY)
 
     u = UniversalDetector.new
     u.reset
