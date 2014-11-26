@@ -63,6 +63,13 @@ describe "Simple" do
     }
   end
 
+  it "detects windows-1252" do
+    assert_chardet_spec_detect  'windows-1252'  , {
+      # not perfect, but better than detecting nil
+      "encoding" => 'windows-1252', "confidence" => 0.36875
+    }
+  end
+
   it "detects russian" do
     # this failed when using $KCODE='u' on 1.8 ... just making sure it stays put
     CharDet.detect("Toto je zpr\xE1va ve form\xE1tu MIME s n\xECkolika \xE8\xE1stmi.\n")["encoding"].must_equal "windows-1251"
