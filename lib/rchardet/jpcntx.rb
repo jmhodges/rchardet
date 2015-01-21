@@ -31,7 +31,6 @@ module CharDet
   DONT_KNOW = -1
   ENOUGH_REL_THRESHOLD = 100
   MAX_REL_THRESHOLD = 1000
-  MINIMUM_DATA_THRESHOLD = 4
 
   # This is hiragana 2-char sequence table, the number in each cell represents its frequency category
   JP2_CHAR_CONTEXT = [

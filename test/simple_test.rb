@@ -68,6 +68,11 @@ describe "Simple" do
     CharDet.detect("Toto je zpr\xE1va ve form\xE1tu MIME s n\xECkolika \xE8\xE1stmi.\n")["encoding"].must_equal "windows-1251"
   end
 
+  it "detects what is likely to be ISO-8859-2 w/ garbage chars" do
+    bad = "Colegio Nuestra Se\xcc\xb1ora Del Rosario"
+    CharDet.detect(bad)["encoding"].must_equal "ISO-8859-2"
+  end
+
   it "does not blow up on invalid encoding" do
     bad = "bad encoding: \xc3\x28"
     CharDet.detect(bad)["encoding"].must_equal "ISO-8859-2"
