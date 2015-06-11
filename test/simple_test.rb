@@ -15,7 +15,7 @@ describe "Simple" do
     raise "Fixed"
   end
 
-  it "detects EUC_JP" do 
+  it "detects EUC_JP" do
     assert_chardet_spec_detect 'EUC-JP', {
       "encoding" => 'EUC-JP', "confidence" => 0.99
     }
@@ -38,7 +38,7 @@ describe "Simple" do
       "encoding" => 'EUC-JP', "confidence" => 0.99
     }
   end
-  
+
   it "detects UTF_16BE" do
     assert_chardet_spec_detect 'UTF-16BE' , {
       "encoding" => 'UTF-16BE', "confidence" => 1
@@ -49,7 +49,7 @@ describe "Simple" do
     assert_chardet_spec_detect 'UTF-16LE' , {
       "encoding" => 'UTF-16LE', "confidence" => 1
     }
-  end  
+  end
 
   it "detects ISO_2022_JP" do
     assert_chardet_spec_detect  'ISO-2022-JP'  , {
