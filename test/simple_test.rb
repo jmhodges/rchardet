@@ -27,6 +27,18 @@ describe "Simple" do
     }
   end
 
+  it "detects Shift_JIS from short string" do
+    CharDet.detect("日本語".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+  end
+
+  it "detects Shift_JIS from more than four characters" do
+    CharDet.detect("四文字以上の日本語".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+  end
+
+  it "detects Shift_JIS from Japanese and ASCII characters" do
+    CharDet.detect("日本語 and ASCII characters".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+  end
+
   it "detects UTF_8" do
     assert_chardet_spec_detect 'UTF-8' , {
       "encoding" => 'utf-8', "confidence" => 0.99
