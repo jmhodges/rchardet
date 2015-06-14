@@ -29,7 +29,6 @@
 ######################### END LICENSE BLOCK #########################
 
 module CharDet
-  MINIMUM_DATA_THRESHOLD = 4
   MINIMUM_THRESHOLD = 0.20
   EPureAscii = 0
   EEscAscii = 1
