@@ -117,6 +117,14 @@ module CharDet
         return -1
       end
     end
+
+    def get_confidence
+      if @freqChars <= MINIMUM_DATA_THRESHOLD
+        return SURE_NO
+      end
+
+      super
+    end
   end
 
   class EUCKRDistributionAnalysis < CharDistributionAnalysis
