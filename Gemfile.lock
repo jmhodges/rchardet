@@ -17,3 +17,6 @@ DEPENDENCIES
   minitest-rg
   rake
   wwtd
+
+BUNDLED WITH
+   1.10.2
