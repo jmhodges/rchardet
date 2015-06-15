@@ -21,6 +21,7 @@ confidence = cd['confidence'] # 0.0 <= confidence <= 1.0
  - [Denis Savitsky](https://github.com/sadfuzzy)
  - [Sam Rose](https://github.com/samwho)
  - [Cole Thompson](https://github.com/coledot)
+ - [KITAITI Makoto](https://github.com/KitaitiMakoto)
 
 Maintained by [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
