@@ -15,7 +15,7 @@ describe "Simple" do
     raise "Fixed"
   end
 
-  it "detects EUC_JP" do 
+  it "detects EUC_JP" do
     assert_chardet_spec_detect 'EUC-JP', {
       "encoding" => 'EUC-JP', "confidence" => 0.99
     }
@@ -25,6 +25,18 @@ describe "Simple" do
     assert_chardet_spec_detect 'Shift_JIS', {
       "encoding" => 'SHIFT_JIS', "confidence" => (RUBY_VERSION > "1.9.3" ? 0.99 : 1) # TODO the 1.9 value might be wrong but I cannot find any bug
     }
+  end
+
+  it "detects Shift_JIS from short string" do
+    CharDet.detect("日本語".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+  end
+
+  it "detects Shift_JIS from more than four characters" do
+    CharDet.detect("四文字以上の日本語".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+  end
+
+  it "detects Shift_JIS from Japanese and ASCII characters" do
+    CharDet.detect("日本語 and ASCII characters".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
   end
 
   it "detects UTF_8" do
@@ -38,7 +50,7 @@ describe "Simple" do
       "encoding" => 'EUC-JP', "confidence" => 0.99
     }
   end
-  
+
   it "detects UTF_16BE" do
     assert_chardet_spec_detect 'UTF-16BE' , {
       "encoding" => 'UTF-16BE', "confidence" => 1
@@ -49,7 +61,7 @@ describe "Simple" do
     assert_chardet_spec_detect 'UTF-16LE' , {
       "encoding" => 'UTF-16LE', "confidence" => 1
     }
-  end  
+  end
 
   it "detects ISO_2022_JP" do
     assert_chardet_spec_detect  'ISO-2022-JP'  , {

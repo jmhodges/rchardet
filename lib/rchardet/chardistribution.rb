@@ -68,7 +68,7 @@ module CharDet
     def get_confidence
       # """return confidence based on existing data"""
       # if we didn't receive any character in our consideration range, return negative answer
-      if @totalChars <= 0 || @freqChars <= MINIMUM_DATA_THRESHOLD
+      if @totalChars <= 0
         return SURE_NO
       end
 
@@ -116,6 +116,14 @@ module CharDet
       else
         return -1
       end
+    end
+
+    def get_confidence
+      if @freqChars <= MINIMUM_DATA_THRESHOLD
+        return SURE_NO
+      end
+
+      super
     end
   end
 
