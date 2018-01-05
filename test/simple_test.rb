@@ -15,6 +15,12 @@ describe "Simple" do
     raise "Fixed"
   end
 
+  it "detects UTF-7" do
+    assert_chardet_spec_detect 'UTF-7', {
+        "encoding" => 'UTF-7', "confidence" => 0.99
+    }
+  end
+
   it "detects EUC_JP" do
     assert_chardet_spec_detect 'EUC-JP', {
       "encoding" => 'EUC-JP', "confidence" => 0.99

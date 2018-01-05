@@ -90,6 +90,16 @@ module CharDet
         elsif aBuf[0, 2] == "\xFE\xFF"
           # FE FF  UTF-16, big endian BOM
           @result = {'encoding' =>  "UTF-16BE", 'confidence' =>  1.0}
+        elsif aBuf[0, 3] == "\x2B\x2F\x76" && ["\x38", "\x39", "\x2B", "\x2F"].include?(aBuf[3, 1])
+          # NOTE: Ruby only includes "dummy" support for UTF-7.
+          # A Ruby UTF-7 string can't have methods called on it, nor can it be converted to anything else, but "BINARY"/"ASCII-8BIT".
+          # Still, this doesn't make detection useless, as UTF-7 encodings exist in the wild, and the scenario may need to be handled.
+          # 2B 2F 76 38  UTF-7
+          # 2B 2F 76 39  UTF-7
+          # 2B 2F 76 2B  UTF-7
+          # 2B 2F 76 2F  UTF-7
+          # 2B 2F 76 38 2D  UTF-7 with no following character (empty string)
+          @result = {'encoding' =>  "UTF-7", 'confidence' =>  0.99}
         end
       end
 
