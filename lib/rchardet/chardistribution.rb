@@ -149,16 +149,16 @@ module CharDet
     end
   end
 
-  class GB2312DistributionAnalysis < CharDistributionAnalysis
+  class GB18030DistributionAnalysis < CharDistributionAnalysis
     def initialize
       super()
-      @charToFreqOrder = GB2312CharToFreqOrder
-      @tableSize = GB2312_TABLE_SIZE
-      @typicalDistributionRatio = GB2312_TYPICAL_DISTRIBUTION_RATIO
+      @charToFreqOrder = GB18030CharToFreqOrder
+      @tableSize = GB18030_TABLE_SIZE
+      @typicalDistributionRatio = GB18030_TYPICAL_DISTRIBUTION_RATIO
     end
 
     def get_order(aStr)
-      # for GB2312 encoding, we are interested 
+      # for GB18030 encoding, we are interested 
       #  first  byte range: 0xb0 -- 0xfe
       #  second byte range: 0xa1 -- 0xfe
       # no validation needed here. State machine has done that

@@ -26,7 +26,7 @@
 # 02110-1301  USA
 ######################### END LICENSE BLOCK #########################
 
-# GB2312 most frequently used character table
+# GB18030 most frequently used character table
 #
 # Char to FreqOrder table , from hz6763
 
@@ -41,11 +41,11 @@
 # Typical Distribution Ratio about 25% of Ideal one, still much higher that RDR
 
 module CharDet
-GB2312_TYPICAL_DISTRIBUTION_RATIO = 0.9
+GB18030_TYPICAL_DISTRIBUTION_RATIO = 0.9
 
-GB2312_TABLE_SIZE = 3760
+GB18030_TABLE_SIZE = 3760
 
-GB2312CharToFreqOrder = [
+GB18030CharToFreqOrder = [
 1671, 749,1443,2364,3924,3807,2330,3921,1704,3463,2691,1511,1515, 572,3191,2205,
 2361, 224,2558, 479,1711, 963,3162, 440,4060,1905,2966,2947,3580,2647,3961,3842,
 2204, 869,4207, 970,2678,5626,2944,2956,1479,4048, 514,3595, 588,1346,2820,3409,

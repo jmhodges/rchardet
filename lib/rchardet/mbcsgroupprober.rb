@@ -36,7 +36,7 @@ module CharDet
                     UTF8Prober.new,
                     SJISProber.new,
                     EUCJPProber.new,
-                    GB2312Prober.new,
+                    GB18030Prober.new,
                     EUCKRProber.new,
                     Big5Prober.new,
                     EUCTWProber.new
