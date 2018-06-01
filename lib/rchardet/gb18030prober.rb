@@ -27,16 +27,16 @@
 ######################### END LICENSE BLOCK #########################
 
 module CharDet
-  class GB2312Prober < MultiByteCharSetProber
+  class GB18030Prober < MultiByteCharSetProber
     def initialize
       super
-      @codingSM = CodingStateMachine.new(GB2312SMModel)
-      @distributionAnalyzer = GB2312DistributionAnalysis.new()
+      @codingSM = CodingStateMachine.new(GB18030SMModel)
+      @distributionAnalyzer = GB18030DistributionAnalysis.new()
       reset()
     end
 
     def get_charset_name
-      return "GB2312"
+      return "GB18030"
     end
   end
 end

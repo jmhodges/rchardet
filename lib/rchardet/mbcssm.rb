@@ -239,9 +239,9 @@ module CharDet
     'name' =>  'x-euc-tw'
   }.freeze
 
-  # GB2312
+  # GB18030
 
-  GB2312_cls = [
+  GB18030_cls = [
     1,1,1,1,1,1,1,1,  # 00 - 07 
     1,1,1,1,1,1,0,0,  # 08 - 0f 
     1,1,1,1,1,1,1,1,  # 10 - 17 
@@ -276,7 +276,7 @@ module CharDet
     6,6,6,6,6,6,6,0  # f8 - ff 
   ].freeze
 
-  GB2312_st = [
+  GB18030_st = [
     EError,EStart,EStart,EStart,EStart,EStart,     3,EError,#00-07 
     EError,EError,EError,EError,EError,EError,EItsMe,EItsMe,#08-0f 
     EItsMe,EItsMe,EItsMe,EItsMe,EItsMe,EError,EError,EStart,#10-17 
@@ -290,13 +290,13 @@ module CharDet
   # it is used for frequency analysis only, and we are validing 
   # each code range there as well. So it is safe to set it to be 
   # 2 here. 
-  GB2312CharLenTable = [0, 1, 1, 1, 1, 1, 2].freeze
+  GB18030CharLenTable = [0, 1, 1, 1, 1, 1, 2].freeze
 
-  GB2312SMModel = {'classTable' =>  GB2312_cls,
+  GB18030SMModel = {'classTable' =>  GB18030_cls,
     'classFactor' =>  7,
-    'stateTable' =>  GB2312_st,
-    'charLenTable' =>  GB2312CharLenTable,
-    'name' =>  'GB2312'
+    'stateTable' =>  GB18030_st,
+    'charLenTable' =>  GB18030CharLenTable,
+    'name' =>  'GB18030'
   }.freeze
 
   # Shift_JIS
