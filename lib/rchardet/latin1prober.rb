@@ -133,7 +133,7 @@ module CharDet
       if total < 0.01
         confidence = 0.0
       else
-        confidence = (@freqCounter[3] / total) - (@freqCounter[1] * 20.0 / total)
+        confidence = (@freqCounter[3].to_f / total) - (@freqCounter[1] * 20.0 / total)
       end
       if confidence < 0.0
         confidence = 0.0

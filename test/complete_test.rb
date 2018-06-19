@@ -31,6 +31,8 @@ describe "Complex" do
 
       assert u.result, "result should not be nil"
       assert u.result['encoding'], "encoding should not be nil, result: #{u.result.inspect}"
+      assert u.result['confidence'], "confidence should not be nil, result: #{u.result.inspect}"
+      assert_equal u.result['confidence'].class, Float
       assert_equal encoding, u.result['encoding'].downcase
     end
   end

@@ -4,7 +4,9 @@ require_relative "test_helper"
 describe "Simple" do
   def assert_chardet_spec_detect(file, expected)
     content = File.open("test/simple_assets/#{file}.txt", 'rb'){|io| io.read }
-    assert_equal expected, CharDet.detect(content)
+    detected = CharDet.detect(content)
+    assert_equal expected, detected
+    assert_equal detected['confidence'].class, Float
   end
 
   def pending
@@ -29,7 +31,7 @@ describe "Simple" do
 
   it "detects Shift_JIS" do
     assert_chardet_spec_detect 'Shift_JIS', {
-      "encoding" => 'SHIFT_JIS', "confidence" => (RUBY_VERSION > "1.9.3" ? 0.99 : 1) # TODO the 1.9 value might be wrong but I cannot find any bug
+      "encoding" => 'SHIFT_JIS', "confidence" => (RUBY_VERSION > "1.9.3" ? 0.99 : 1.0) # TODO the 1.9 value might be wrong but I cannot find any bug
     }
   end
 
@@ -59,13 +61,13 @@ describe "Simple" do
 
   it "detects UTF_16BE" do
     assert_chardet_spec_detect 'UTF-16BE' , {
-      "encoding" => 'UTF-16BE', "confidence" => 1
+      "encoding" => 'UTF-16BE', "confidence" => 1.0
     }
   end
 
   it "detects UTF_16LE" do
     assert_chardet_spec_detect 'UTF-16LE' , {
-      "encoding" => 'UTF-16LE', "confidence" => 1
+      "encoding" => 'UTF-16LE', "confidence" => 1.0
     }
   end
 
@@ -78,6 +80,13 @@ describe "Simple" do
   it "detects big5" do
     assert_chardet_spec_detect  'big5'  , {
       "encoding" => 'Big5', "confidence" => 0.99
+    }
+  end
+
+  it "detects windows-1252" do
+    assert_chardet_spec_detect  'windows-1252'  , {
+      # not perfect, but better than detecting nil
+      "encoding" => 'windows-1252', "confidence" => 0.36875
     }
   end
 

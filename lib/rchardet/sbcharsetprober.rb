@@ -110,7 +110,7 @@ module CharDet
     def get_confidence
       r = 0.01
       if @totalSeqs > 0
-        r = (1.0 * @seqCounters[POSITIVE_CAT]) / @totalSeqs / @model['mTypicalPositiveRatio']
+        r = @seqCounters[POSITIVE_CAT].to_f / @totalSeqs / @model['mTypicalPositiveRatio']
         r = r * @freqChar / @totalChar
         if r >= 1.0
           r = 0.99
