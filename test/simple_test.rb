@@ -34,15 +34,15 @@ describe "Simple" do
   end
 
   it "detects Shift_JIS from short string" do
-    CharDet.detect("日本語".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+    _(CharDet.detect("日本語".encode("Shift_JIS"))["encoding"]).must_equal "SHIFT_JIS"
   end
 
   it "detects Shift_JIS from more than four characters" do
-    CharDet.detect("四文字以上の日本語".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+    _(CharDet.detect("四文字以上の日本語".encode("Shift_JIS"))["encoding"]).must_equal "SHIFT_JIS"
   end
 
   it "detects Shift_JIS from Japanese and ASCII characters" do
-    CharDet.detect("日本語 and ASCII characters".encode("Shift_JIS"))["encoding"].must_equal "SHIFT_JIS"
+    _(CharDet.detect("日本語 and ASCII characters".encode("Shift_JIS"))["encoding"]).must_equal "SHIFT_JIS"
   end
 
   it "detects UTF_8" do
@@ -83,23 +83,23 @@ describe "Simple" do
 
   it "detects russian" do
     # this failed when using $KCODE='u' on 1.8 ... just making sure it stays put
-    CharDet.detect("Toto je zpr\xE1va ve form\xE1tu MIME s n\xECkolika \xE8\xE1stmi.\n")["encoding"].must_equal "windows-1251"
+    _(CharDet.detect("Toto je zpr\xE1va ve form\xE1tu MIME s n\xECkolika \xE8\xE1stmi.\n")["encoding"]).must_equal "windows-1251"
   end
 
   it "detects what is likely to be ISO-8859-2 w/ garbage chars" do
     bad = "Colegio Nuestra Se\xcc\xb1ora Del Rosario"
-    CharDet.detect(bad)["encoding"].must_equal "ISO-8859-2"
+    _(CharDet.detect(bad)["encoding"]).must_equal "ISO-8859-2"
   end
 
   it "does not blow up on invalid encoding" do
     bad = "bad encoding: \xc3\x28"
-    CharDet.detect(bad)["encoding"].must_equal "ISO-8859-2"
-    bad.encoding.must_equal Encoding::UTF_8
+    _(CharDet.detect(bad)["encoding"]).must_equal "ISO-8859-2"
+    _(bad.encoding).must_equal Encoding::UTF_8
   end
 
   it "does not blow up on multibyte UTF-8 chars" do
     accented = "Juan Pérez"
-    CharDet.detect(accented)["encoding"].must_equal "ISO-8859-2"
-    accented.encoding.must_equal Encoding::UTF_8
+    _(CharDet.detect(accented)["encoding"]).must_equal "ISO-8859-2"
+    _(accented.encoding).must_equal Encoding::UTF_8
   end
 end
