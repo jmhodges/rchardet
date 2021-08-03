@@ -2,9 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     bump (0.5.0)
-    minitest (4.7.5)
-    minitest-rg (1.1.1)
-      minitest (< 5.0)
+    minitest (5.14.4)
+    minitest-rg (5.2.0)
+      minitest (~> 5.0)
     rake (10.3.2)
     wwtd (0.5.5)
 
@@ -19,4 +19,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   1.10.2
+   2.2.16
