@@ -169,7 +169,7 @@ module CharDet
     def get_confidence
       # This is just one way to calculate confidence. It works well for me.
       if @totalRel > MINIMUM_DATA_THRESHOLD
-        return (@totalRel - @relSample[0]) / @totalRel
+        return (@totalRel - @relSample[0]).to_f / @totalRel
       else
         return DONT_KNOW
       end
