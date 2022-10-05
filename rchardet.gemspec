@@ -8,4 +8,7 @@ Gem::Specification.new "rchardet", CharDet::VERSION do |s|
   s.files      = Dir["lib/**/*"]
   s.license    = "LGPL"
   s.required_ruby_version = ">= 1.9.3"
+
+  s.add_development_dependency "minitest"
+  s.add_development_dependency "rake"
 end
