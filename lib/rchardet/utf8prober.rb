@@ -75,7 +75,7 @@ module CharDet
     def get_confidence
       unlike = 0.99
       if @numOfMBChar < 6
-        unlike = unlike * (ONE_CHAR_PROB ** @numOfMBChar)
+        unlike *= ONE_CHAR_PROB ** @numOfMBChar
         return 1.0 - unlike
       else
         return unlike

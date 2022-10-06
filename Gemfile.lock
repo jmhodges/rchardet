@@ -1,0 +1,20 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bump (0.10.0)
+    maxitest (4.1.0)
+      minitest (>= 5.0.0, < 5.15.0)
+    minitest (5.14.4)
+    rake (13.0.6)
+
+PLATFORMS
+  arm64-darwin-21
+  x86_64-linux
+
+DEPENDENCIES
+  bump
+  maxitest
+  rake
+
+BUNDLED WITH
+   2.3.12
