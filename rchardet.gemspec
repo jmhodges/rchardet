@@ -7,5 +7,5 @@ Gem::Specification.new "rchardet", CharDet::VERSION do |s|
   s.summary    = "Character encoding auto-detection in Ruby. As smart as your browser. Open source."
   s.files      = Dir["lib/**/*", "LGPL-LICENSE.txt"]
   s.license    = "LGPL"
-  s.required_ruby_version = ">= 2.6.0"
+  s.required_ruby_version = ">= 3.0.0"
 end
