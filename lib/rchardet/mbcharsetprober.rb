@@ -34,7 +34,7 @@ module CharDet
       super
       @distributionAnalyzer = nil
       @codingSM = nil
-      @lastChar = "\x00\x00"
+      @lastChar = +"\x00\x00"
     end
 
     def reset
@@ -45,7 +45,7 @@ module CharDet
       if @distributionAnalyzer
         @distributionAnalyzer.reset()
       end
-      @lastChar = "\x00\x00"
+      @lastChar = +"\x00\x00"
     end
 
     def get_charset_name
