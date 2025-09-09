@@ -63,9 +63,21 @@ describe "Simple" do
     }
   end
 
+  it "detects UTF_16BE without BOM" do
+    assert_chardet_spec_detect 'UTF-16BE_without_BOM', {
+      "encoding" => 'UTF-16BE', "confidence" => 0.85
+    }
+  end
+
   it "detects UTF_16LE" do
     assert_chardet_spec_detect 'UTF-16LE', {
       "encoding" => 'UTF-16LE', "confidence" => 1
+    }
+  end
+
+  it "detects UTF_16LE without BOM" do
+    assert_chardet_spec_detect 'UTF-16LE_without_BOM', {
+      "encoding" => 'UTF-16LE', "confidence" => 0.85
     }
   end
 
