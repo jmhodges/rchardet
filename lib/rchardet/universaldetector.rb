@@ -42,6 +42,7 @@ module CharDet
       @highBitDetector = /[\x80-\xFF]/n
       @escDetector = /(\033|\~\{)/n
       @escCharSetProber = nil
+      @utf1632prober = nil
       @charSetProbers = []
       reset()
     end
@@ -55,6 +56,9 @@ module CharDet
       @lastChar = ''
       if @escCharSetProber
         @escCharSetProber.reset()
+      end
+      if @utf1632prober
+        @utf1632prober.reset()
       end
       for prober in @charSetProbers
         prober.reset()
@@ -117,6 +121,22 @@ module CharDet
       end
 
       @lastChar = aBuf[-1, 1]
+
+      if !@utf1632prober
+        @utf1632prober = UTF1632Prober.new()
+      end
+
+      if @utf1632prober.get_state == EDetecting
+        if @utf1632prober.feed(aBuf) == EFoundIt
+          @result = {
+            "encoding" => @utf1632prober.get_charset_name(),
+            "confidence" => @utf1632prober.get_confidence()
+          }
+        @done = true
+        return
+        end
+      end
+
       if @inputState == EEscAscii
         if !@escCharSetProber
           @escCharSetProber = EscCharSetProber.new()

@@ -53,6 +53,7 @@ require 'rchardet/sbcsgroupprober'
 require 'rchardet/sjisprober'
 require 'rchardet/universaldetector'
 require 'rchardet/utf8prober'
+require 'rchardet/utf1632prober'
 
 module CharDet
   def CharDet.detect(aBuf)
