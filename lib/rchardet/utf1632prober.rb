@@ -169,17 +169,13 @@ module CharDet
              !@invalid_utf16le
     end
 
+    # Validate if the quad of bytes is valid UTF-32.
+    # UTF-32 is valid in the range 0x00000000 - 0x0010FFFF
+    # excluding 0x0000D800 - 0x0000DFFF
+    # https://en.wikipedia.org/wiki/UTF-32
     # @param [Array<Integer>] quad four consecutive bytes
     # @return [void]
     def validate_utf32_characters(quad)
-      "" "
-        Validate if the quad of bytes is valid UTF-32.
-
-        UTF-32 is valid in the range 0x00000000 - 0x0010FFFF
-        excluding 0x0000D800 - 0x0000DFFF
-
-        https://en.wikipedia.org/wiki/UTF-32
-        " ""
       if quad[0] != 0 or quad[1] > 0x10 or quad[0] == 0 and quad[1] == 0 and (0xD8..0xDF).include?(quad[2])
         @invalid_utf32be = true
       end
@@ -188,18 +184,14 @@ module CharDet
       end
     end
 
+    # Validate if the pair of bytes is valid UTF-16.
+    # UTF-16 is valid in the range 0x0000 - 0xFFFF excluding 0xD800 - 0xFFFF
+    # with an exception for surrogate pairs, which must be in the range
+    # 0xD800-0xDBFF followed by 0xDC00-0xDFFF
+    # https://en.wikipedia.org/wiki/UTF-16
     # @param [Array<Integer>] pair two consecutive bytes
     # @return [void]
     def validate_utf16_characters(pair)
-      "" "
-        Validate if the pair of bytes is  valid UTF-16.
-
-        UTF-16 is valid in the range 0x0000 - 0xFFFF excluding 0xD800 - 0xFFFF
-        with an exception for surrogate pairs, which must be in the range
-        0xD800-0xDBFF followed by 0xDC00-0xDFFF
-
-        https://en.wikipedia.org/wiki/UTF-16
-        " ""
       if !@first_half_surrogate_pair_detected_16be
         if (0xD8..0xDB).include? pair[0]
           @first_half_surrogate_pair_detected_16be = true
